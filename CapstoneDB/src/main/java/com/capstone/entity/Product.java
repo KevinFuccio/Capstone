@@ -1,4 +1,4 @@
-package com.capstone.auth.entity;
+package com.capstone.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

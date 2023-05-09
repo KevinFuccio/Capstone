@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.capstone.auth.entity.ERole;
 import com.capstone.auth.entity.Role;
 import com.capstone.auth.entity.User;
 import com.capstone.auth.exception.MyAPIException;
@@ -20,6 +19,7 @@ import com.capstone.auth.payload.RegisterDto;
 import com.capstone.auth.repository.RoleRepository;
 import com.capstone.auth.repository.UserRepository;
 import com.capstone.auth.security.JwtTokenProvider;
+import com.capstone.enums.ERole;
 
 
 
@@ -74,10 +74,7 @@ public class AuthServiceImpl implements AuthService {
             throw new MyAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
         }
         
-     // add check for email exists in database
-        if(userRepository.existsBySecretCode(registerDto.getSecretCode())){
-            throw new MyAPIException(HttpStatus.BAD_REQUEST, "SecretCode is already exists!.");
-        }
+     
 
         User user = new User();
         user.setName(registerDto.getName());

@@ -11,11 +11,20 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.capstone.auth.entity.ERole;
 import com.capstone.auth.entity.Role;
 import com.capstone.auth.repository.RoleRepository;
 import com.capstone.auth.repository.UserRepository;
 import com.capstone.auth.service.AuthService;
+import com.capstone.entity.ProductCategory;
+import com.capstone.entity.ShippingMethod;
+import com.capstone.entity.StatusOrder;
+import com.capstone.enums.Category_Name;
+import com.capstone.enums.ERole;
+import com.capstone.enums.Shipping_method;
+import com.capstone.enums.Status_Order;
+import com.capstone.repository.ProductCategoryRepository;
+import com.capstone.repository.ShippingMethodRepository;
+import com.capstone.repository.StatusOrderRepository;
 
 
 
@@ -27,6 +36,12 @@ public class AuthRunner implements ApplicationRunner {
 	@Autowired UserRepository userRepository;
 	@Autowired PasswordEncoder passwordEncoder;
 	@Autowired AuthService authService;
+	@Autowired
+	ProductCategoryRepository productRepo;
+	@Autowired
+	ShippingMethodRepository shippingRepo;
+	@Autowired
+	StatusOrderRepository statusRepo;
 	
 	private Set<Role> adminRole;
 	private Set<Role> moderatorRole;
@@ -36,6 +51,9 @@ public class AuthRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println("Run...");
 		//setRoleDefault();
+		//setCategoryDefault();
+		//setShippingDefault();
+		//setStatusOrderDefault();
 		
 	}
 	
@@ -63,6 +81,42 @@ public class AuthRunner implements ApplicationRunner {
 		
 		userRole = new HashSet<Role>();
 		userRole.add(user);
+	}
+	private void setCategoryDefault() {
+		ProductCategory food = new ProductCategory();
+		food.setName(Category_Name.FOOD);
+		productRepo.save(food);
+		ProductCategory plant = new ProductCategory();
+		plant.setName(Category_Name.PLANT);
+		productRepo.save(plant);
+		ProductCategory seed = new ProductCategory();
+		seed.setName(Category_Name.SEED);
+		productRepo.save(seed);		
+	}
+	private void setShippingDefault() {
+		ShippingMethod standard = new ShippingMethod();
+		standard.setName(Shipping_method.STANDARD);
+		shippingRepo.save(standard);
+		ShippingMethod express = new ShippingMethod();
+		express.setName(Shipping_method.EXPRESS);
+		shippingRepo.save(express);
+		ShippingMethod oneDay = new ShippingMethod();
+		oneDay.setName(Shipping_method.ONE_DAY);
+		shippingRepo.save(oneDay);		
+	}
+	private void setStatusOrderDefault() {
+		StatusOrder INITIALIZED = new StatusOrder();
+		INITIALIZED.setName(Status_Order.INITIALIZED);
+		statusRepo.save(INITIALIZED);
+		
+		StatusOrder PENDING = new StatusOrder();
+		PENDING.setName(Status_Order.PENDING);
+		statusRepo.save(PENDING);
+		
+		StatusOrder DELIVERED = new StatusOrder();
+		DELIVERED.setName(Status_Order.DELIVERED);
+		statusRepo.save(DELIVERED);
+		
 	}
 
 }

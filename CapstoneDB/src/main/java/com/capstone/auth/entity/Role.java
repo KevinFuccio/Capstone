@@ -1,5 +1,7 @@
 package com.capstone.auth.entity;
 
+import com.capstone.enums.ERole;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

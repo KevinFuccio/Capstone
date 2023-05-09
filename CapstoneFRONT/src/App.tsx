@@ -8,56 +8,56 @@ import { User } from './Redux/Interface';
 declare const google: any;
 
 function App() {
-  const [utente,setUtente] = useState({
-    id:"",
-    name:"",
-    email:"",
-    family_name:"",
-    given_name:""
-  });
-  const user = useSelector((state:RootState)=> state.user);
-  const dispatch = useDispatch();
-  let buttonClick = document.getElementById('ciao')
+  // const [utente,setUtente] = useState({
+  //   id:"",
+  //   name:"",
+  //   email:"",
+  //   family_name:"",
+  //   given_name:""
+  // });
+  // const user = useSelector((state:RootState)=> state.user);
+  // const dispatch = useDispatch();
+  // let buttonClick = document.getElementById('ciao')
   
-  function handleCallbackResponse(response:any){
+  // function handleCallbackResponse(response:any){
    
-    console.log(response.credential)
+  //   console.log(response.credential)
 
-    let user:User = jwtDecode(response.credential);
+  //   let user:User = jwtDecode(response.credential);
     
-     myfetch(user).then((data)=>{
-      setUtente({
-        id:data,
-        name: user.name,
-        email: user.email,
-        family_name: user.family_name,
-        given_name: user.given_name
-      })
-     });
-  }
+  //    myfetch(user).then((data)=>{
+  //     setUtente({
+  //       id:data,
+  //       name: user.name,
+  //       email: user.email,
+  //       family_name: user.family_name,
+  //       given_name: user.given_name
+  //     })
+  //    });
+  // }
   
-  useEffect(()=>{
-    dispatch({
-      type: USER,
-      payload: utente
-    })
-  },[utente])
+  // useEffect(()=>{
+  //   dispatch({
+  //     type: USER,
+  //     payload: utente
+  //   })
+  // },[utente])
 
-  useEffect(()=>{
+  // useEffect(()=>{
     
-    /* global google */
-    google.accounts.id.initialize({
-      client_id:"494859266688-5hjingpssjnvej2gobsjccmrbil4mh1h.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    })
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme: "outline",size:"large"}
-    )
-      buttonClick?.addEventListener('click',function(){
-        console.log("ciao");
-      });
-  },[buttonClick]);
+  //   /* global google */
+  //   google.accounts.id.initialize({
+  //     client_id:"494859266688-5hjingpssjnvej2gobsjccmrbil4mh1h.apps.googleusercontent.com",
+  //     callback: handleCallbackResponse
+  //   })
+  //   google.accounts.id.renderButton(
+  //     document.getElementById("signInDiv"),
+  //     {theme: "outline",size:"large"}
+  //   )
+  //     buttonClick?.addEventListener('click',function(){
+  //       console.log("ciao");
+  //     });
+  // },[buttonClick]);
 
   return (
     <div className="App">

@@ -1,4 +1,4 @@
-package com.capstone.auth.entity;
+package com.capstone.enums;
 
 public enum ERole {
 	ROLE_USER,

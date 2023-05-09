@@ -11,6 +11,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.annotations.Fetch;
+
+import com.capstone.entity.Address;
+
 
 
 
@@ -43,6 +47,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<>();
-    @ManyToMany
+    
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Address> address;
 }

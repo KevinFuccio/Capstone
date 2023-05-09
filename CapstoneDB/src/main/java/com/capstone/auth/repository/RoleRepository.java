@@ -2,8 +2,8 @@ package com.capstone.auth.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.capstone.auth.entity.ERole;
 import com.capstone.auth.entity.Role;
+import com.capstone.enums.ERole;
 
 import java.util.Optional;
 
