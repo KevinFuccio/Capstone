@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+import './App.scss';
 import { RootState } from './Redux/Store';
 import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from 'jwt-decode';
 import { USER, myfetch } from './Redux/ActionTypes';
 import { User } from './Redux/Interface';
+import Navbar from './Components/NavComponent/Navbar';
 declare const google: any;
 
 function App() {
@@ -61,8 +62,7 @@ function App() {
 
   return (
     <div className="App">
-     <div id='signInDiv'></div>
-     <button id='ciao'></button>
+     <Navbar/>
     </div>
   );
 }

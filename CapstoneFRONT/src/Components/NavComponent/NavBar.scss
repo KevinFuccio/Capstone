@@ -1,0 +1,37 @@
+.navbar_main{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(255, 162, 0);
+        height: 50px;
+        padding: 0px 20px;
+}
+.links{
+    a{
+        text-decoration: none;
+        font-size: large;
+        font-weight: 600;
+        color: white;
+    }
+     a:last-child{
+            margin-left: 20px;
+    }
+}
+.login{
+    button{
+        background-color: rgb(255, 132, 0);
+        border: none;
+        color: white;
+        padding: 10px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        cursor: pointer;
+        
+    }
+    
+    button:last-child{
+        margin-left: 20px;
+    }
+}
