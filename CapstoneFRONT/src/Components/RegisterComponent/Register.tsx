@@ -110,11 +110,13 @@ const Register = () => {
   };
 
   return (
-    <>
+    <main>
+      <div className="box">
+
       {success ? (
         <section>
           <h1>Success!</h1>
-          <p>
+          <p className="line">
           <Link to={"/login"}>Sign In</Link>
           </p>
         </section>
@@ -315,7 +317,7 @@ const Register = () => {
             </p>
 
             <button
-              disabled={!validUser || !validPwd || !validMatch ? true : false}
+              disabled={!validUser || !validPwd || !validMatch || !validEmail || !validName ? true : false}
             >
               Sign Up
             </button>
@@ -329,7 +331,8 @@ const Register = () => {
           </p>
         </section>
       )}
-    </>
+      </div>
+    </main>
   );
 };
 
