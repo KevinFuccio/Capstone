@@ -146,6 +146,7 @@ const Register = () => {
             <input
               type="text"
               id="name"
+              className="effect-1"
               ref={userRef}
               autoComplete="off"
               onChange={(e) => setName(e.target.value)}
@@ -156,6 +157,7 @@ const Register = () => {
               onFocus={() => setNameFocus(true)}
               onBlur={() => setNameFocus(false)}
             />
+            <span className="focus-bg"></span>
             <p
               id="nidnote"
               className={
@@ -184,6 +186,7 @@ const Register = () => {
             <input
               type="text"
               id="username"
+              className="effect-1"
               autoComplete="off"
               onChange={(e) => setUser(e.target.value)}
               value={user}
@@ -221,6 +224,7 @@ const Register = () => {
             <input
               type="email"
               id="email"
+              className="effect-1"
               autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -258,6 +262,7 @@ const Register = () => {
             <input
               type="password"
               id="password"
+              className="effect-1"
               onChange={(e) => setPwd(e.target.value)}
               value={pwd}
               required
@@ -298,6 +303,7 @@ const Register = () => {
             <input
               type="password"
               id="confirm_pwd"
+              className="effect-1"
               onChange={(e) => setMatchPwd(e.target.value)}
               value={matchPwd}
               required
