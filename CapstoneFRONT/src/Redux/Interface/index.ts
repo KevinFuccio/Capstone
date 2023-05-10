@@ -8,3 +8,9 @@ export interface User{
 export interface MyState{
     user: User
 }
+export interface register{
+    name:String,
+    username:String,
+    email:String,
+    password:String
+}

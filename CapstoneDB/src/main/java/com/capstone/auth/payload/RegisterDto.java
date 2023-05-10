@@ -18,8 +18,4 @@ public class RegisterDto {
     private String username;
     private String email;
     private String password;
-    private String secretCode;
-    private String creditCard;
- // Per registrare tutti come USER di Default commentare roles
-    private Set<String> roles;
 }

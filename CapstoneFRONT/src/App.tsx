@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from 'jwt-decode';
 import { USER, myfetch } from './Redux/ActionTypes';
 import { User } from './Redux/Interface';
-import Navbar from './Components/NavComponent/Navbar';
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import MainPage from './Components/MainPageComponent/MainPage';
+import Register from './Components/RegisterComponent/Register';
 declare const google: any;
 
 function App() {
@@ -62,7 +64,12 @@ function App() {
 
   return (
     <div className="App">
-     <Navbar/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<MainPage/>}/>
+          <Route path='/register'element={<Register/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
