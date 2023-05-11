@@ -1,5 +1,6 @@
 package com.capstone.auth.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capstone.auth.entity.User;
 import com.capstone.auth.payload.JWTAuthResponse;
 import com.capstone.auth.payload.LoginDto;
 import com.capstone.auth.payload.RegisterDto;
+import com.capstone.auth.repository.UserRepository;
 import com.capstone.auth.service.AuthService;
 
 
@@ -22,6 +25,8 @@ import com.capstone.auth.service.AuthService;
 public class AuthController {
 
     private AuthService authService;
+    @Autowired
+    private UserRepository userRepo;
 
     public AuthController(AuthService authService) {
         this.authService = authService;
@@ -32,10 +37,13 @@ public class AuthController {
     public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto){
            	
     	String token = authService.login(loginDto);
+    	User u = userRepo.findByUsername(loginDto.getUsername()).get();
 
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+        jwtAuthResponse.setId(u.getId());
         jwtAuthResponse.setUsername(loginDto.getUsername());
         jwtAuthResponse.setAccessToken(token);
+        u.getRoles().forEach(e-> jwtAuthResponse.getRoles().add(e));
 
         return ResponseEntity.ok(jwtAuthResponse);
     }

@@ -3,20 +3,20 @@ import "./Register.scss";
 import { Button, Form } from "react-bootstrap";
 import { useRef, useState, useEffect } from "react";
 import { registerFetch } from "../../Redux/ActionTypes";
-import { register } from "../../Redux/Interface";
+import { Registration } from "../../Redux/Interface";
 import {
   faCheck,
   faTimes,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import axio from "../../api/axio";
+
+import axios from "../../api/axio";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX= /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-const REGISTER_URL = "http://localhost:8080/auth/register";
+const REGISTER_URL = "/auth/register";
 
 const Register = () => {
   const userRef = useRef<HTMLInputElement>(null);

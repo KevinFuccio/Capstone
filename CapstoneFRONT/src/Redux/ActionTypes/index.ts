@@ -1,5 +1,5 @@
 import { log } from "console";
-import { User, register } from "../Interface";
+import { User, Registration } from "../Interface";
 
 export const USER = "USER";
 let url= "http://localhost:8080/api/auth/register"
@@ -28,7 +28,7 @@ export const myfetch = async(params:User) =>{
         
     }
 }
-export const registerFetch= async(body:register)=>{
+export const registerFetch= async(body:Registration)=>{
 
     let res = await fetch(url,{
       method:"POST",

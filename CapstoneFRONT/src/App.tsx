@@ -8,6 +8,7 @@ import { User } from './Redux/Interface';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import MainPage from './Components/MainPageComponent/MainPage';
 import Register from './Components/RegisterComponent/Register';
+import Login from './Components/LoginComponent/Login';
 declare const google: any;
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage/>}/>
           <Route path='/register'element={<Register/>}/>
+          <Route path='/login'element={<Login/>}/>
         </Routes>
       </BrowserRouter>
     </div>
