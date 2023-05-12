@@ -14,6 +14,7 @@ import java.util.Set;
 import org.hibernate.annotations.Fetch;
 
 import com.capstone.entity.Address;
+import com.capstone.entity.Product;
 
 
 
@@ -50,4 +51,6 @@ public class User {
     
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Address> address;
+    @OneToMany
+    private List<Product> products;
 }

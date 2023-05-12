@@ -26,6 +26,6 @@ public class AddressService {
 		a.setRegion(address.getRegion());
 		u.getAddress().add(a);
 		userRepo.save(u);
-		return "address addedd successfully";
+		return "address added successfully";
 	}
 }

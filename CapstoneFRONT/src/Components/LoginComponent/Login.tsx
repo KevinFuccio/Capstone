@@ -44,13 +44,12 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      const id = response?.data?.id;
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setAuth({id,user,pwd,roles,accessToken})
+      console.log(response);
+      
+      
       dispatch({
         type:USER,
-        payload:{id,username:user,accessToken,roles}
+        payload: response.data
       })
       
       

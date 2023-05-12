@@ -44,6 +44,9 @@ public class AuthController {
         jwtAuthResponse.setUsername(loginDto.getUsername());
         jwtAuthResponse.setAccessToken(token);
         u.getRoles().forEach(e-> jwtAuthResponse.getRoles().add(e));
+        u.getProducts().forEach(e-> jwtAuthResponse.getCart().add(e));
+        u.getAddress().forEach(e-> jwtAuthResponse.getAddress().add(e));
+        
 
         return ResponseEntity.ok(jwtAuthResponse);
     }

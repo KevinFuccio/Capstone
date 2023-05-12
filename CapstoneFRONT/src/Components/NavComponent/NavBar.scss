@@ -1,8 +1,36 @@
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search{
+    border-radius: 5px;
+    height: 24px;
+    width: 30%;
+    margin: 5px 0px;
+    border: 1px solid;
+    &:focus{
+         outline: none;
+       }
+}
+.searchBtn{
+    height: 28px;
+    width: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid;
+    position: relative;
+    right: 15px;
+    background-color: #ffbb00;
+    cursor: pointer;
+   
+}
 .navbar_main{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #ffae00;
+        background-color: #ff8400;
         height: 50px;
         padding: 0px 20px;
 }
@@ -19,19 +47,64 @@
 }
 .login{
     button{
-        background-color: rgb(255, 132, 0);
+        background-color: #ff8400;
         border: none;
         color: white;
-        padding: 10px 32px;
+        width: 88px;
+        height: 34px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 12px;
+        font-weight: 600;
+        border-radius: 5px;
         cursor: pointer;
         
     }
     
+    
     a:last-child{
        margin-left: 20px;
+       button{
+        background-color: #ffffff;
+        color: #ff8400;
+        border: 2px solid #ff8400;
+       }
+    }
+    
+}
+.loginDiv{
+    display: flex;
+    align-items: center;
+    button{
+        background-color: #ff8400;
+        border: 1px solid white;
+        color: white;
+        width: 60px;
+        height: 34px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 5px;
+        margin-left: 15px;
+        cursor: pointer;
+        
+    }
+    .shoppingCart{
+        background-color: #ff8400;
+        border: none;
+        color: white;
+        width: 20px;
+        height: 34px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 5px;
+        margin-right: 20px;
+        cursor: pointer;
     }
 }

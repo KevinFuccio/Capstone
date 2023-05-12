@@ -1,3 +1,14 @@
+//STATE interfaces
+export interface MyState{
+    user: Registration
+}
+
+export interface ProductsState{
+    products:Products[]
+}
+
+
+//OBJECT interfaces
 export interface User{
     id:string
     name:string,
@@ -5,16 +16,34 @@ export interface User{
     family_name:string,
     given_name:string
 }
-export interface MyState{
-    user: Registration
-}
+
 export interface Roles{
-    id:Number,
-    roleName:String
+    id:number,
+    roleName:string
 }
 export interface Registration{
-    id:String,
-    username:String,
-    accessToken:String,
-    roles:Roles[]
+    id:number,
+    username:string,
+    accessToken:string,
+    roles:Roles[],
+    cart:Products[],
+    address:Address[]
 }
+export interface Products{
+        description:string,
+        id:number,
+        image:string,
+        name:string,
+        price:number,
+        productCategory:{},
+        quantityInStock: number
+}
+export interface Address{
+    id:number;
+	city:string;
+	streetName:string;
+	streetNumber:string;
+	postalCode:string;
+	region:string;
+}
+
