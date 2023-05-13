@@ -6,7 +6,7 @@ import "./MainPageHeader.scss"
 import { Products } from "../../../Redux/Interface";
 
 const MainPageHeader = ()=>{
-    
+    const loggedUser = useSelector((state:RootState)=> state.user)
     const products = useSelector((state:RootState)=> state.products.products);
     const dispatch = useDispatch();
     const cartAdd = (obj:Products)=>{
@@ -37,7 +37,7 @@ const MainPageHeader = ()=>{
                     <p>{el.name}</p>
                     <img src={el.image} alt="" style={{height:"60px"}}/>
                     <p>{el.price}€/kg</p>
-                    <button onClick={()=>cartAdd(el)}>+</button>
+                    <button onClick={()=>cartAdd(el)} disabled={!loggedUser.user.username? true:false}>+</button>
                 </div>
             )
             )}

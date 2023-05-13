@@ -10,6 +10,7 @@ export const USER = "USER";
 export const SHOPPING_ADD= "SHOPPING_ADD";
 export const PRODUCTS = "PRODUCTS";
 export const CART_ADD ="CART_ADD";
+export const CART_REMOVE ="CART_REMOVE";
 let url= "http://localhost:8080/api/auth/register"
 
 
