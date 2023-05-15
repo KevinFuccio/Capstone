@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,7 @@ import org.hibernate.annotations.Fetch;
 
 import com.capstone.entity.Address;
 import com.capstone.entity.Product;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -50,7 +52,10 @@ public class User {
     private Set<Role> roles = new HashSet<>();
     
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<Address> address;
-    @OneToMany
-    private List<Product> products;
+    @JoinTable(name = "users_address",
+    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id")
+)	@JsonIgnoreProperties(value = "users")
+    private List<Address> address = new ArrayList<>();
+    
 }

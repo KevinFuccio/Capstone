@@ -10,9 +10,27 @@ const Navbar = () =>{
     const loggedUser = useSelector((state:RootState)=>state.user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    //const totalProducts = [...loggedUser.user.cart.productsItems]
+    //console.log(totalProducts);
+    
+    
+    const cartSum = ()=>{
+        let totalQty = 0;
+    
+        if(loggedUser.user.cart.productsItems.length > 0){
+            totalQty =  loggedUser.user?.cart.productsItems.reduce((acc,product)=>{
+                return acc + product.cartQuantity
+            },0)
+        }else{
+            return totalQty
+        }
+        return totalQty;
+    }
+    
 
     const handleLogout = (e:any)=>{
         e.preventDefault();
+        navigate("/")
         dispatch({
             type: USER,
             payload:{}
@@ -22,9 +40,7 @@ const Navbar = () =>{
         e.preventDefault();
         
     }
-    const navigateToCart = ()=>{
-        
-    }
+    
 return(
     <div>
         <div>
@@ -50,7 +66,7 @@ return(
            </div>
             ):(
                 <div className="loginDiv">
-                    <button className="shoppingCart" onClick={()=>navigate("/cart")}><FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>{loggedUser.user.cart.length}</button>
+                    <button className="shoppingCart" onClick={()=>navigate("/cart")}><FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>{cartSum()}</button>
                     <div>bentornato {loggedUser.user.username}!</div>
                     <button onClick={handleLogout}>Logout</button>
                 </div>

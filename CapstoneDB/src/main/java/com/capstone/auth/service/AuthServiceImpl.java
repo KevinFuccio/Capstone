@@ -74,13 +74,14 @@ public class AuthServiceImpl implements AuthService {
             throw new MyAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
         }
         
-     
+        
 
         User user = new User();
         user.setName(registerDto.getName());
         user.setUsername(registerDto.getUsername());
         user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+        
        
         
         Set<Role> roles = new HashSet<>();
