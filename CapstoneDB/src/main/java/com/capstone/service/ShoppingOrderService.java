@@ -81,16 +81,6 @@ public class ShoppingOrderService {
 
 		ShoppingOrder.getOrderLine().forEach(e -> s.setTotalPrice(e.getPrice()));
 
-//		List<PaymentMethod> paymentMethods = new ArrayList<>();
-//		ShoppingOrder.getPaymentMethod().forEach(payment -> {
-//			PaymentMethod p1 = new PaymentMethod();
-//			p1.setCreate_time(LocalDate.now());
-//			p1.setProvider(payment.getProvider());
-//			p1.setStatus(payment.getStatus());
-//			p1.setShoppingOrder(s);
-//			PaymentMethod paymentMethod = payRepo.save(p1);
-//			paymentMethods.add(paymentMethod);
-//		});
 
 		shoppingOrderRepo.save(s);
 		List<PaymentMethod> pay = new ArrayList<>();
