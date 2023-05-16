@@ -31,11 +31,14 @@ public class ShoppingOrder {
 	@JsonIgnoreProperties
 	private Address address;
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value = "shoppingOrder_id")
+	@JsonIgnoreProperties(value = "shoppingOrder")
 	private List<OrderLine> orderLine;
 	private double totalPrice;
 	@ManyToOne
 	private StatusOrder status;
 	@ManyToOne
 	private ShippingMethod shippingMethod;
+	@JsonIgnoreProperties(value = "shoppingOrder")
+	@OneToMany(mappedBy = "shoppingOrder")
+	private List<PaymentMethod> paymentMethod;
 }

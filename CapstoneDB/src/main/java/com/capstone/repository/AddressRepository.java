@@ -8,5 +8,5 @@ import com.capstone.entity.Address;
 
 
 public interface AddressRepository extends JpaRepository<Address, Long>{
-	Optional<Address> findByCityAndStreetNameAndStreetNumberAndPostalCodeAndRegion(String City,String StreetName,String StreetNumber,String PostalCode,String Region);
+	Optional<Address> findByCityAndStreetNameAndAndPostalCodeAndRegion(String City,String StreetName,String PostalCode,String Region);
 }

@@ -21,15 +21,14 @@ public class AddressService {
 
 	public Address createAndConnectAddress(AddressDto address, Long userId) {
 		User u = userRepo.findById(userId).get();
-		Address a = addressRepo.findByCityAndStreetNameAndStreetNumberAndPostalCodeAndRegion(address.getCity(),
-				address.getStreetName(), address.getStreetNumber(), address.getPostalCode(), address.getRegion())
+		Address a = addressRepo.findByCityAndStreetNameAndAndPostalCodeAndRegion(address.getCity(),
+				address.getStreetName(), address.getPostalCode(), address.getRegion())
 				.orElse(null);
 
 		if (a == null) {
 			a = new Address();
 			a.setCity(address.getCity());
 			a.setStreetName(address.getStreetName());
-			a.setStreetNumber(address.getStreetNumber());
 			a.setPostalCode(address.getPostalCode());
 			a.setRegion(address.getRegion());
 			addressRepo.save(a);

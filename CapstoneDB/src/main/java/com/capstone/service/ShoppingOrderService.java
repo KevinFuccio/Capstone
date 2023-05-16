@@ -1,6 +1,8 @@
 package com.capstone.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.capstone.auth.entity.User;
 import com.capstone.auth.repository.UserRepository;
 import com.capstone.entity.Address;
+import com.capstone.entity.PaymentMethod;
 import com.capstone.entity.ShippingMethod;
 import com.capstone.entity.ShoppingOrder;
 import com.capstone.entity.StatusOrder;
@@ -15,14 +18,17 @@ import com.capstone.enums.Status_Order;
 import com.capstone.payload.AddressDto;
 import com.capstone.payload.ShoppingOrderDto;
 import com.capstone.repository.AddressRepository;
+import com.capstone.repository.PaymentMethodRepository;
 import com.capstone.repository.ShippingMethodRepository;
 import com.capstone.repository.ShoppingOrderRepository;
 import com.capstone.repository.StatusOrderRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ShoppingOrderService {
 	@Autowired
-	ShoppingOrderRepository  shoppingOrderRepo;
+	ShoppingOrderRepository shoppingOrderRepo;
 	@Autowired
 	UserRepository userRepo;
 	@Autowired
@@ -30,34 +36,36 @@ public class ShoppingOrderService {
 	@Autowired
 	AddressService addressService;
 	@Autowired
+	PaymentService payService;
+	@Autowired
 	AddressRepository addressRepo;
 	@Autowired
 	StatusOrderRepository statusRepo;
-	
-	public ShoppingOrder createOrder(ShoppingOrderDto ShoppingOrder,Long user_id) {
+	@Autowired
+	PaymentMethodRepository payRepo;
+
+	public ShoppingOrder createOrder(ShoppingOrderDto ShoppingOrder, Long user_id) {
+		ShoppingOrder s = new ShoppingOrder();
 		
+
 		AddressDto addDto = new AddressDto();
 		addDto.setStreetName(ShoppingOrder.getAddress().getStreetName());
-		addDto.setStreetNumber(ShoppingOrder.getAddress().getStreetNumber());
 		addDto.setRegion(ShoppingOrder.getAddress().getRegion());
 		addDto.setPostalCode(ShoppingOrder.getAddress().getPostalCode());
 		addDto.setCity(ShoppingOrder.getAddress().getCity());
-		
-		
+
 		User u = userRepo.findById(user_id).get();
 		Address address = addressService.createAndConnectAddress(addDto, u.getId());
-		
-		ShoppingOrder s = new ShoppingOrder();
-		ShoppingOrder.getOrderLine().forEach(e->e.setShoppingOrder_id(s));
+
 		s.setUser(u);
 		s.setInitializedOrder(LocalDate.now());
 		s.setOrderLine(ShoppingOrder.getOrderLine());
-		//da passare via front-end per semplicità
+		s.getOrderLine().forEach(e -> e.setShoppingOrder(s));
 		s.setAddress(address);
 		s.setStatus(statusRepo.findByName(Status_Order.INITIALIZED).get());
 		s.setShippingMethod(shippingRepo.findByName(ShoppingOrder.getShippingMethod()).get());
-		
-		switch(s.getShippingMethod().getName()) {
+
+		switch (s.getShippingMethod().getName()) {
 		case STANDARD:
 			s.setScheduledDelivery(LocalDate.now().plusDays(5));
 			break;
@@ -70,11 +78,30 @@ public class ShoppingOrderService {
 		default:
 			break;
 		}
-		ShoppingOrder.getOrderLine().forEach(e->s.setTotalPrice(e.getPrice()));
+
+		ShoppingOrder.getOrderLine().forEach(e -> s.setTotalPrice(e.getPrice()));
+
+//		List<PaymentMethod> paymentMethods = new ArrayList<>();
+//		ShoppingOrder.getPaymentMethod().forEach(payment -> {
+//			PaymentMethod p1 = new PaymentMethod();
+//			p1.setCreate_time(LocalDate.now());
+//			p1.setProvider(payment.getProvider());
+//			p1.setStatus(payment.getStatus());
+//			p1.setShoppingOrder(s);
+//			PaymentMethod paymentMethod = payRepo.save(p1);
+//			paymentMethods.add(paymentMethod);
+//		});
+
 		shoppingOrderRepo.save(s);
-		
-		
-		
+		List<PaymentMethod> pay = new ArrayList<>();
+		ShoppingOrder.getPaymentMethod().forEach(e -> {
+			PaymentMethod p = payService.createNewPayment(e.getProvider(), e.getStatus(),s);
+			pay.add(p);
+		});
+		s.setPaymentMethod(pay);
+		s.getPaymentMethod().forEach(e-> e.setShoppingOrder(s));
+
 		return s;
 	}
+
 }

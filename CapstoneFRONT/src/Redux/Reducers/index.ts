@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CART_ADD, CART_MODIFY, CART_REMOVE, TOT_CART, USER } from "../ActionTypes";
+import { CART_ADD, CART_CLEAR, CART_MODIFY, CART_REMOVE, TOT_CART, USER } from "../ActionTypes";
 import { MyState, Registration, Products, ModifyCartPayload, CartActionPayload } from "../Interface";
 
 const initialState: MyState = {
@@ -98,6 +98,16 @@ export const userReducer = (
               ...state.user.cart,
               cartTotalAmount: cartSumAmount,
               cartTotalQuantity:cartSumQuantity
+            }
+          }
+        }
+        case CART_CLEAR:
+        return{
+          user:{
+            ...state.user,
+            cart:{
+              ...state.user.cart,
+              productsItems:[]
             }
           }
         }

@@ -22,7 +22,6 @@ public class Address {
 	private Long id;
 	private String city;
 	private String streetName;
-	private String streetNumber;
 	private String postalCode;
 	private String region;
 	@JsonIgnoreProperties(value = "address")

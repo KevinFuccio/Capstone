@@ -12,6 +12,7 @@ export const CART_ADD ="CART_ADD";
 export const CART_REMOVE ="CART_REMOVE";
 export const CART_MODIFY ="CART_MODIFY";
 export const TOT_CART="TOT_CART";
+export const CART_CLEAR ="CART_CLEAR"
 
 let url= "http://localhost:8080/api/auth/register"
 
