@@ -10,11 +10,14 @@ import com.capstone.auth.repository.UserRepository;
 import com.capstone.entity.Address;
 import com.capstone.entity.ShippingMethod;
 import com.capstone.entity.ShoppingOrder;
+import com.capstone.entity.StatusOrder;
+import com.capstone.enums.Status_Order;
 import com.capstone.payload.AddressDto;
 import com.capstone.payload.ShoppingOrderDto;
 import com.capstone.repository.AddressRepository;
 import com.capstone.repository.ShippingMethodRepository;
 import com.capstone.repository.ShoppingOrderRepository;
+import com.capstone.repository.StatusOrderRepository;
 
 @Service
 public class ShoppingOrderService {
@@ -28,6 +31,8 @@ public class ShoppingOrderService {
 	AddressService addressService;
 	@Autowired
 	AddressRepository addressRepo;
+	@Autowired
+	StatusOrderRepository statusRepo;
 	
 	public ShoppingOrder createOrder(ShoppingOrderDto ShoppingOrder,Long user_id) {
 		
@@ -49,8 +54,23 @@ public class ShoppingOrderService {
 		s.setOrderLine(ShoppingOrder.getOrderLine());
 		//da passare via front-end per semplicità
 		s.setAddress(address);
-		s.setTotalPrice(ShoppingOrder.getTotalPrice());
+		s.setStatus(statusRepo.findByName(Status_Order.INITIALIZED).get());
 		s.setShippingMethod(shippingRepo.findByName(ShoppingOrder.getShippingMethod()).get());
+		
+		switch(s.getShippingMethod().getName()) {
+		case STANDARD:
+			s.setScheduledDelivery(LocalDate.now().plusDays(5));
+			break;
+		case EXPRESS:
+			s.setScheduledDelivery(LocalDate.now().plusDays(3));
+			break;
+		case ONE_DAY:
+			s.setScheduledDelivery(LocalDate.now().plusDays(1));
+			break;
+		default:
+			break;
+		}
+		ShoppingOrder.getOrderLine().forEach(e->s.setTotalPrice(e.getPrice()));
 		shoppingOrderRepo.save(s);
 		
 		

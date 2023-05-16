@@ -23,7 +23,6 @@ public class ProductController {
 	ProductRepository productRepo;
 	
 	@GetMapping("/all")
-	@PreAuthorize("permitAll")
 	public ResponseEntity<List<Product>> productList(){
 		return new ResponseEntity<List<Product>>(productRepo.findAll(),HttpStatus.OK);
 	}

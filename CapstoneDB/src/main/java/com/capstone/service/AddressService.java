@@ -34,7 +34,7 @@ public class AddressService {
 			a.setRegion(address.getRegion());
 			addressRepo.save(a);
 		}
-		if(!u.getAddress().contains(a)) {			
+		if (!u.getAddress().contains(a)) {
 			u.getAddress().add(a);
 			a.getUsers().add(u);
 			userRepo.save(u);
