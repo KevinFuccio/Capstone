@@ -12,7 +12,7 @@ const MainPage = ()=>{
     return(
         <div>
             <Navbar/>
-            <MainPageHeader></MainPageHeader>
+            <MainPageHeader/>
         </div>
     )
 };
