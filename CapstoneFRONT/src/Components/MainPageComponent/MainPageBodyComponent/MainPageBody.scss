@@ -1,0 +1,17 @@
+.MainPageBody{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    .product-card-wrapper{
+        display: flex;
+        flex-direction: column;
+        .product-card{
+            height: 200px;
+            display: flex;
+            align-items: center;
+            img{
+                width: 150px;
+            }
+        }
+    }
+}

@@ -6,40 +6,21 @@ import "./MainPageHeader.scss";
 import { Products } from "../../../Redux/Interface";
 
 const MainPageHeader = () => {
-  const loggedUser = useSelector((state: RootState) => state.user);
-  const products = useSelector((state: RootState) => state.products.products);
-  const dispatch = useDispatch();
-  const cartAdd = (obj: Products) => {
-    dispatch({
-      type: CART_ADD,
-      payload: obj,
-    });
-  };
+  
 
-  useEffect(() => {
-    (async () => {
-      let data = await fetchProducts();
-      dispatch({
-        type: PRODUCTS,
-        payload: data,
-      });
-    })();
-  }, []);
+//   <button
+//     onClick={() => cartAdd(el)}
+//     disabled={!loggedUser.user.username ? true : false}
+//   >
+//     +
+//   </button>;
+
+  
   return (
-    <div className="cards">
-      {products?.map((el, i) => (
-        <div key={i}>
-          <p>{el.name}</p>
-          <img src={el.image} alt="" style={{ height: "60px" }} />
-          <p>{el.price}€/kg</p>
-          <button
-            onClick={() => cartAdd(el)}
-            disabled={!loggedUser.user.username ? true : false}
-          >
-            +
-          </button>
-        </div>
-      ))}
+    <div className="cards mo5">
+      <div>
+        <h2>Your Favorite <br/> Grocery Shop here!</h2>
+      </div>
     </div>
   );
 };
