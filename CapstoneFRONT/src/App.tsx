@@ -10,7 +10,6 @@ import Register from './Components/RegisterComponent/Register';
 import Login from './Components/LoginComponent/Login';
 import Cart from './Components/CartComponent/Cart';
 import Order from './Components/OrderComponent/Order';
-import "bootstrap/dist/css/bootstrap.css";
 import ThankYou from './Components/ThankYouComponent/ThankYou';
 declare const google: any;
 
