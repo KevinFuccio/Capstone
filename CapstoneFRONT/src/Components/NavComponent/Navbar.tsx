@@ -42,7 +42,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="mo5 pv5">
+    <div className="mo5 pt3">
       <div className="navbar_main">
         <div className="links">
           <Link to={"/"}>Home</Link>
