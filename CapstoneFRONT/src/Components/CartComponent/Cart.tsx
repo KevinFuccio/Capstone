@@ -59,17 +59,16 @@ const Cart = () => {
       payload: obj.id,
     });
   };
-  const optionQuantity = (product:Products) => {
-    const options = Array.from(
-      { length: product.quantityInStock },
-      (_, i) => (
-        <option key={i + 1} value={i + 1}>
-          {i + 1}
-        </option>
-      )
-    );
-    return options;
-  };
+  const optionQuantity = () => {
+    const options = (
+        <>
+      <option value="10">10/kg</option>
+      <option value="20">20/kg</option>
+      <option value="30">30/kg</option>
+    </>
+  );
+  return options;
+};
   
   useEffect(()=>{
     dispatch({
@@ -93,9 +92,9 @@ const Cart = () => {
           <img src={el.image} alt="" style={{ height: "60px" }} />
           <p>{el.price}€/kg</p>
           <select value={el.cartQuantity} name="options" id="1" onChange={(e)=>cartAdd(el,e) }>
-            {optionQuantity(el)}
+            {optionQuantity()}
           </select>
-          <p>quantity:{el.cartQuantity}</p>
+          <p>quantity:{el.cartQuantity}/kg</p>
           <button onClick={() => cartRemove(el)}>-</button>
         </div>
       ))}

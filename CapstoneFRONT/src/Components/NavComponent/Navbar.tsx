@@ -42,11 +42,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className="mo5 pt3">
+    <div className="">
       <div className="navbar_main">
         <div className="links">
           <Link to={"/"}>Home</Link>
-          <Link to={"/products"}>Products</Link>
+          <Link to={"/products"}>Prodotti</Link>
         </div>
         <div className="navbar-form-wrapper">
           <form onSubmit={handleSubmit}>
@@ -60,7 +60,7 @@ const Navbar = () => {
         {!loggedUser.user.username ? (
           <div className="login">
             <Link to={"/register"}>
-              <button>Register</button>
+              <button>Registrati</button>
             </Link>
             <Link to={"/login"}>
               <button>Login</button>
@@ -70,7 +70,7 @@ const Navbar = () => {
           <div className="loginDiv">
             <button className="shoppingCart" onClick={() => navigate("/cart")}>
               <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
-              {cartSum()}
+              {loggedUser.user.cart.productsItems.length}
             </button>
             <div>bentornato {loggedUser.user.username}!</div>
             <button onClick={handleLogout}>Logout</button>

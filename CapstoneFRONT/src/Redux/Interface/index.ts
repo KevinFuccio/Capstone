@@ -40,7 +40,10 @@ export interface Products {
   image: string;
   name: string;
   price: number;
-  productCategory: {};
+  productCategory: {
+    id:number,
+    name:string
+  };
   quantityInStock: number;
   cartQuantity:number;
 }
@@ -55,6 +58,10 @@ export interface Address {
 export interface ModifyCartPayload {
   obj: Products;
   optionValue: string;
+}
+export interface AddPayload {
+  obj1: Products;
+  opt: string;
 }
 export interface CartActionPayload {
   cartSumAmount: number;
@@ -166,6 +173,7 @@ export interface Shipping {
 
 export interface ShippingAddress {
   address_line_1: string;
+  address_line_2: string;
   admin_area_2:   string;
   admin_area_1:   string;
   postal_code:    string;

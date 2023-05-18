@@ -107,7 +107,9 @@ export const userReducer = (
             ...state.user,
             cart:{
               ...state.user.cart,
-              productsItems:[]
+              productsItems:[],
+              cartTotalQuantity: 0,
+              cartTotalAmount: 0
             }
           }
         }

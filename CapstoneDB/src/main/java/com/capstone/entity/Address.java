@@ -24,7 +24,7 @@ public class Address {
 	private String streetName;
 	private String postalCode;
 	private String region;
-	@JsonIgnoreProperties(value = "address")
+	@JsonIgnore
 	@ManyToMany(mappedBy = "address")
 	private List<User> users = new ArrayList<>();
 	

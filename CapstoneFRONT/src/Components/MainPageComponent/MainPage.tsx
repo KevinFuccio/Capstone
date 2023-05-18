@@ -7,9 +7,7 @@ import MainPageBody from "./MainPageBodyComponent/MainPageBody";
 
     
 
-const MainPage = ()=>{
-    const loggedUser = useSelector((state:RootState)=> state.user)
-    
+const MainPage = ()=>{    
     return(
         <>
         <div className="background-orange">

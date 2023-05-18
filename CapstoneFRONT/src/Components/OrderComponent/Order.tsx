@@ -19,9 +19,14 @@ const Order = () => {
     <>
       <div>
         <header>
+          <div className="checkout">
+            
+          </div>
+          <div>
           <PayPalScriptProvider options={{ "client-id": clientId }}>
             <ButtonWrapper currency={currency} showSpinner={false}/>
           </PayPalScriptProvider>
+          </div>
         </header>
       </div>
     </>

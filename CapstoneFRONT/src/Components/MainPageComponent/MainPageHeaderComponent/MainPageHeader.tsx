@@ -8,18 +8,13 @@ import { Products } from "../../../Redux/Interface";
 const MainPageHeader = () => {
   
 
-//   <button
-//     onClick={() => cartAdd(el)}
-//     disabled={!loggedUser.user.username ? true : false}
-//   >
-//     +
-//   </button>;
+
 
   
   return (
     <div className="cards mo5">
       <div>
-        <h2>Your Favorite <br/> Grocery Shop here!</h2>
+        <h2>Prodotti freschi<br/> e biologici!</h2>
       </div>
     </div>
   );

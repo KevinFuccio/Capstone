@@ -1,10 +1,11 @@
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
 import { Navigate, useNavigate } from "react-router-dom";
 import axio from "../../api/axio";
 import { PaypalInterface } from "../../Redux/Interface";
+import { CART_CLEAR } from "../../Redux/ActionTypes";
 
 const ButtonWrapper = ({
   currency,
@@ -23,16 +24,19 @@ const ButtonWrapper = ({
     (state: RootState) => state.user.user.cart.cartTotalAmount
   );
   const navigate = useNavigate();
+  const personalDispatch = useDispatch();
 
   const shoppingOrder = async (paypalData: PaypalInterface) => {
     const address = {
       address: {
         city: paypalData.purchase_units[0].shipping.address.admin_area_1,
-        streetName:paypalData.purchase_units[0].shipping.address.address_line_1,
+        streetName:
+          paypalData.purchase_units[0].shipping.address.address_line_1 +
+          paypalData.purchase_units[0].shipping.address.address_line_2,
         postalCode: paypalData.purchase_units[0].shipping.address.postal_code,
         region: paypalData.purchase_units[0].shipping.address.country_code,
       },
-      orderLine: user.cart.productsItems.map(el => ({
+      orderLine: user.cart.productsItems.map((el) => ({
         product: {
           id: el.id,
           name: el.name,
@@ -40,18 +44,18 @@ const ButtonWrapper = ({
           image: el.image,
           quantityInStock: el.quantityInStock,
           price: el.price,
-          productCategory: el.productCategory
+          productCategory: el.productCategory,
         },
         quantity: el.cartQuantity,
-        price: Number((el.price * el.cartQuantity).toFixed(2))
+        price: Number((el.price * el.cartQuantity).toFixed(2)),
       })),
       shippingMethod: "STANDARD",
-      paymentMethod:[
+      paymentMethod: [
         {
-            provider:"PayPal",
-            status:paypalData.status
-        }
-      ]
+          provider: "PayPal",
+          status: paypalData.status,
+        },
+      ],
     };
     console.log(address);
 
@@ -122,7 +126,12 @@ const ButtonWrapper = ({
           const order: any = await actions.order?.capture();
           const orderPost = shoppingOrder(order);
           console.log(order, "order");
-          setTimeout(() => navigate(`/thankYou/${user.username}`), 500);
+          setTimeout(() => {
+            navigate(`/thankYou/${user.username}`);
+            personalDispatch({
+              type: CART_CLEAR,
+            });
+          }, 500);
         }}
       />
     </>

@@ -11,7 +11,8 @@ import Login from './Components/LoginComponent/Login';
 import Cart from './Components/CartComponent/Cart';
 import Order from './Components/OrderComponent/Order';
 import ThankYou from './Components/ThankYouComponent/ThankYou';
-declare const google: any;
+import Products from './Components/ProductsComponent/Products';
+// declare const google: any;
 
 function App() {
   // const [utente,setUtente] = useState({
@@ -75,6 +76,7 @@ function App() {
           <Route path='/cart'element={<Cart/>}/>
           <Route path='/order' element={<Order/>}/>
           <Route path='/thankYou/:name' element={<ThankYou/>}/>
+          <Route path='/products/:id' element={<Products/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,17 +1,27 @@
-.MainPageBody{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    .product-card-wrapper{
+.MainPageBody-wrapper{
+    h2{
+        text-align: start;
+        padding: 20px;
+    }
+    .MainPageBody{
         display: flex;
-        flex-direction: column;
-        .product-card{
-            height: 200px;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        .product-card-wrapper{
             display: flex;
-            align-items: center;
-            img{
-                width: 150px;
+            flex-direction: column;
+            .product-card{
+                height: 200px;
+                display: flex;
+                align-items: center;
+                img{
+                    width: 150px;
+                }
             }
         }
+    }
+    a{
+        text-decoration: none;
+        color: black;
     }
 }
