@@ -54,13 +54,7 @@ const Product = () => {
   );
 
   
-  const categorymodify = (product: Products,
-    e: React.ChangeEvent<HTMLSelectElement>)=>{
-    // dispatch({
-    //   type: CART_MODIFY_VARIANT,
-    //   payload: { obj: product, optionValue: e.currentTarget.value },
-    // });
-  }
+
   const cartAdd = (obj: Products, e: string,qty:string) => {
     let variant;
     switch (e) {
@@ -138,7 +132,7 @@ const Product = () => {
                   name="options"
                   id="1"
                   onChange={(e) => {
-                    categorymodify(product, e);
+                    
                     setSelectEvent(e.currentTarget.value);
                     
                     
