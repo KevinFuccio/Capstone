@@ -44,6 +44,10 @@ export interface Products {
     id:number,
     name:string
   };
+  productVariant:{
+    id:number,
+    variant:string
+  }
   quantityInStock: number;
   cartQuantity:number;
 }
@@ -60,8 +64,8 @@ export interface ModifyCartPayload {
   optionValue: string;
 }
 export interface AddPayload {
-  obj1: Products;
-  opt: string;
+  object1: Products;
+  qty: string;
 }
 export interface CartActionPayload {
   cartSumAmount: number;

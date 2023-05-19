@@ -56,7 +56,7 @@ public class ShoppingOrderService {
 
 		User u = userRepo.findById(user_id).get();
 		Address address = addressService.createAndConnectAddress(addDto, u.getId());
-
+		ShoppingOrder.getOrderLine().forEach(e-> System.out.println(e.getProduct().getProductVariant()));
 		s.setUser(u);
 		s.setInitializedOrder(LocalDate.now());
 		s.setOrderLine(ShoppingOrder.getOrderLine());

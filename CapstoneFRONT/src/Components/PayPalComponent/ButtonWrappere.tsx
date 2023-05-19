@@ -5,7 +5,7 @@ import { RootState } from "../../Redux/Store";
 import { Navigate, useNavigate } from "react-router-dom";
 import axio from "../../api/axio";
 import { PaypalInterface } from "../../Redux/Interface";
-import { CART_CLEAR } from "../../Redux/ActionTypes";
+import { CART_CLEAR, foodTypeConverter } from "../../Redux/ActionTypes";
 
 const ButtonWrapper = ({
   currency,
@@ -14,6 +14,25 @@ const ButtonWrapper = ({
   currency: string;
   showSpinner: boolean;
 }) => {
+  const loggedUser = useSelector((state: RootState) => state.user);
+  const cartSumAmount = () => {
+    let singlePrice = 0;
+
+    if (loggedUser.user.cart.productsItems.length > 0) {
+      singlePrice = loggedUser.user?.cart.productsItems.reduce(
+        (acc, product) => {
+          let n = foodTypeConverter(product)
+
+        return acc + (product.price * n) * product.cartQuantity;
+        },
+        0
+      );
+    } else {
+      return 0;
+    }
+
+    return Number(singlePrice.toFixed(2));
+  };
   const user = useSelector((state: RootState) => state.user.user);
   const ORDER_POSTING = `/api/orders/${user.id}`;
   // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
@@ -43,11 +62,12 @@ const ButtonWrapper = ({
           description: el.description,
           image: el.image,
           quantityInStock: el.quantityInStock,
-          price: el.price,
+          price: foodTypeConverter(el),
           productCategory: el.productCategory,
+          productVariant:[el.productVariant]
         },
         quantity: el.cartQuantity,
-        price: Number((el.price * el.cartQuantity).toFixed(2)),
+        price: user.cart.cartTotalAmount,
       })),
       shippingMethod: "STANDARD",
       paymentMethod: [
@@ -105,11 +125,12 @@ const ButtonWrapper = ({
                     },
                   },
                   items: user.cart.productsItems.map((el) => {
+                    const unitAmount = foodTypeConverter(el);
                     return {
                       name: el.name,
                       unit_amount: {
                         currency_code: currency,
-                        value: el.price.toString(),
+                        value: (el.price * unitAmount).toFixed(2),
                       },
                       quantity: el.cartQuantity.toString(),
                     };

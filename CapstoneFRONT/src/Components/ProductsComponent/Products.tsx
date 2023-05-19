@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { CART_ADD, CART_MODIFY, getProductById } from "../../Redux/ActionTypes";
+import { Link, useParams } from "react-router-dom";
+import { CART_ADD, CART_MODIFY, CART_MODIFY_VARIANT, getProductById } from "../../Redux/ActionTypes";
 import { Products } from "../../Redux/Interface";
 import "./Products.scss";
 import Navbar from "../NavComponent/Navbar";
@@ -12,39 +12,84 @@ const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({} as Products);
   const dispatch = useDispatch();
-  
-  const optionQuantity = () => {
-      const options = (
-          <>
-        <option value="10">10/kg</option>
-        <option value="20">20/kg</option>
-        <option value="30">30/kg</option>
+
+
+  const optionCategory = () => {
+    const options = (
+      <>
+        <option value="S">10/kg</option>
+        <option value="M">20/kg</option>
+        <option value="L">30/kg</option>
       </>
     );
     return options;
-};
-const [selectEvent,setSelectEvent] = useState(optionQuantity().props.children[0].props.value);
-  
-  const cartmodify = (
-    product: Products,
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    dispatch({
-      type: CART_MODIFY,
-      payload: { obj: product, optionValue: e.currentTarget.value },
-    });
   };
-  const cartAdd = (obj: Products, e:string) => {
+  const optionCategory2 = () => {
+    const options = (
+      <>
+        <option value="S">1</option>
+        <option value="M">x5</option>
+        <option value="L">x10</option>
+      </>
+    );
+    return options;
+  };
+
+
+  const options = product.productCategory?.name === "FOOD"? optionCategory():optionCategory2()
+  const optionQuantity = () => {
+    return Array.from({ length: product.quantityInStock }, (_, index) => (
+      <option key={index + 1} value={index + 1}>
+        {index + 1}
+      </option>
+    ));
+  };
+
+  const [selectEvent, setSelectEvent] = useState(
+    options?.props.children[0].props.value
+  );
+
+  const [selectQuantity, setSelectQuantity] = useState(
+    optionQuantity().length > 0? optionQuantity()[0].props.value.toString() : "1"
+  );
+
+  
+  const categorymodify = (product: Products,
+    e: React.ChangeEvent<HTMLSelectElement>)=>{
+    // dispatch({
+    //   type: CART_MODIFY_VARIANT,
+    //   payload: { obj: product, optionValue: e.currentTarget.value },
+    // });
+  }
+  const cartAdd = (obj: Products, e: string,qty:string) => {
+    let variant;
+    switch (e) {
+      case "S":
+        variant = { id: 1, variant: e };
+        break;
+      case "M":
+        variant = { id: 2, variant: e };
+        break;
+      case "L":
+        variant = { id: 3, variant: e };
+        break;
+      default:
+        return;
+    }
+    console.log(obj,e,qty);
+
+    const object1 = {
+      ...obj,
+      productVariant: variant,
+    };
+
     dispatch({
       type: CART_ADD,
-      payload: obj,
+      payload: {object1,qty:qty},
     });
-    dispatch({
-      type: CART_MODIFY,
-      payload: { obj: product, optionValue: e},
-    });
-    
   };
+
+  
 
   useEffect(() => {
     (async () => {
@@ -56,7 +101,10 @@ const [selectEvent,setSelectEvent] = useState(optionQuantity().props.children[0]
       {product.id ? (
         <>
           <Navbar />
+          <div style={{display:"flex"}}>
+          <Link to={"/"}>Go back</Link>
           <h2 className="product-name">{product.name}</h2>
+          </div>
           <div className="product-wrapper">
             <div className="pdw-box">
               <img src={product.image} alt="" className="product-image" />
@@ -84,24 +132,40 @@ const [selectEvent,setSelectEvent] = useState(optionQuantity().props.children[0]
                 <h5 style={{ color: "red" }}>Scorte esaurite</h5>
               )}
               <div className="divSelect">
-                quantità:
+                Taglia:
                 <select
                   value={selectEvent}
                   name="options"
                   id="1"
-                  onChange={(e) => {cartmodify(product, e)
-                     setSelectEvent(e.currentTarget.value)}}
+                  onChange={(e) => {
+                    categorymodify(product, e);
+                    setSelectEvent(e.currentTarget.value);
+                    
+                    
+                  }}
+                >
+                  {options}
+                </select>
+                quantità:
+                <select
+                  value={selectQuantity}
+                  name="options-quantity"
+                  id="2"
+                  onChange={(e) => {
+                   
+                    setSelectQuantity(e.currentTarget.value)
+                    console.log(e.currentTarget.value);
+                  }}
                 >
                   {optionQuantity()}
                 </select>
                 <div className="AddToCartBtn">
-                <button
-                  onClick={() => cartAdd(product, selectEvent)}
-                  disabled={!loggedUser.user.username ? true : false}
-                >
-                  Aggiungi al carrello
-                </button>
-
+                  <button
+                    onClick={() => cartAdd(product, selectEvent,selectQuantity)}
+                    disabled={!loggedUser.user.username ? true : false}
+                  >
+                    Aggiungi al carrello
+                  </button>
                 </div>
               </div>
             </div>
@@ -113,4 +177,5 @@ const [selectEvent,setSelectEvent] = useState(optionQuantity().props.children[0]
     </div>
   );
 };
+
 export default Product;

@@ -15,14 +15,19 @@ import com.capstone.auth.entity.Role;
 import com.capstone.auth.repository.RoleRepository;
 import com.capstone.auth.repository.UserRepository;
 import com.capstone.auth.service.AuthService;
+import com.capstone.entity.Product;
 import com.capstone.entity.ProductCategory;
+import com.capstone.entity.ProductVariant;
 import com.capstone.entity.ShippingMethod;
 import com.capstone.entity.StatusOrder;
 import com.capstone.enums.Category_Name;
 import com.capstone.enums.ERole;
 import com.capstone.enums.Shipping_method;
 import com.capstone.enums.Status_Order;
+import com.capstone.enums.Variant_Enum;
 import com.capstone.repository.ProductCategoryRepository;
+import com.capstone.repository.ProductRepository;
+import com.capstone.repository.ProductVariantRepository;
 import com.capstone.repository.ShippingMethodRepository;
 import com.capstone.repository.StatusOrderRepository;
 
@@ -42,6 +47,10 @@ public class AuthRunner implements ApplicationRunner {
 	ShippingMethodRepository shippingRepo;
 	@Autowired
 	StatusOrderRepository statusRepo;
+	@Autowired
+	ProductVariantRepository variantRepo;
+	@Autowired
+	ProductRepository prodRepo;
 	
 	private Set<Role> adminRole;
 	private Set<Role> moderatorRole;
@@ -50,10 +59,12 @@ public class AuthRunner implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println("Run...");
+		//setProductVariantDefault();
 		//setRoleDefault();
 		//setCategoryDefault();
 		//setShippingDefault();
 		//setStatusOrderDefault();
+		addVariantToProduct();
 		
 	}
 	
@@ -117,6 +128,37 @@ public class AuthRunner implements ApplicationRunner {
 		DELIVERED.setName(Status_Order.DELIVERED);
 		statusRepo.save(DELIVERED);
 		
+	}
+	private void setProductVariantDefault() {
+		ProductVariant S = new ProductVariant();
+		S.setVariant(Variant_Enum.S);
+		variantRepo.save(S);
+		
+		ProductVariant M = new ProductVariant();
+		M.setVariant(Variant_Enum.M);
+		variantRepo.save(M);
+		
+		ProductVariant L = new ProductVariant();
+		L.setVariant(Variant_Enum.L);
+		variantRepo.save(L);
+		
+	}
+	private void addVariantToProduct() {
+		List<Product> p = prodRepo.findAll();
+		Set<ProductVariant> pv = new HashSet<>();
+		List<ProductVariant> pvl = variantRepo.findAll();
+		pvl.forEach(e-> pv.add(e));
+				
+		p.forEach(e->{
+			if(e.getProductVariant().contains(pv)) {
+				
+			}else {				
+				e.setProductVariant(pv);
+				prodRepo.save(e);
+			}
+		
+		});
+	
 	}
 
 }

@@ -8,7 +8,7 @@ import "./Order.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
 import ButtonWrapper from "../PayPalComponent/ButtonWrappere";
-import { CART_MODIFY, CART_REMOVE, TOT_CART } from "../../Redux/ActionTypes";
+import { CART_MODIFY, CART_REMOVE, TOT_CART, foodTypeConverter } from "../../Redux/ActionTypes";
 import { Products } from "../../Redux/Interface";
 const Order = () => {
   const [clientToken, setClientToken] = useState(null);
@@ -19,34 +19,36 @@ const Order = () => {
   const clientId =
     "AXwy2HanA2CEPUmlWjOou2Fq91j3YFWcpFc0WeE1lqJVfwfAvPwWe_5f4wYYLryxywu_-Pfrlhw0jAxy";
 
-  const cartSumAmount = () => {
-    let singlePrice = 0;
-
-    if (loggedUser.user.cart.productsItems.length > 0) {
-      singlePrice = loggedUser.user?.cart.productsItems.reduce(
-        (acc, product) => {
-          return acc + product.price * product.cartQuantity;
-        },
-        0
-      );
-    } else {
-      return 0;
-    }
-
-    return Number(singlePrice.toFixed(2));
-  };
-  const cartSumQuantity = () => {
-    let totalQty = 0;
-
-    if (loggedUser.user.cart.productsItems.length > 0) {
-      totalQty = loggedUser.user?.cart.productsItems.reduce((acc, product) => {
-        return acc + product.cartQuantity;
-      }, 0);
-    } else {
+    const cartSumAmount = () => {
+      let singlePrice = 0;
+  
+      if (loggedUser.user.cart.productsItems.length > 0) {
+        singlePrice = loggedUser.user?.cart.productsItems.reduce(
+          (acc, product) => {
+            let n = foodTypeConverter(product)
+  
+          return acc + (product.price * n) * product.cartQuantity;
+          },
+          0
+        );
+      } else {
+        return 0;
+      }
+  
+      return Number(singlePrice).toFixed(2);
+    };
+    const cartSumQuantity = () => {
+      let totalQty = 0;
+  
+      if (loggedUser.user.cart.productsItems.length > 0) {
+        totalQty = loggedUser.user?.cart.productsItems.reduce((acc, product) => {
+          return acc + product.cartQuantity
+        }, 0);
+      } else {
+        return totalQty;
+      }
       return totalQty;
-    }
-    return totalQty;
-  };
+    };
 
   const cartAdd = (
     product: Products,
@@ -61,20 +63,18 @@ const Order = () => {
   const cartRemove = (obj: Products) => {
     dispatch({
       type: CART_REMOVE,
-      payload: obj.id,
+      payload: obj,
     });
   };
-  const optionQuantity = () => {
-    const options = (
-      <>
-        <option value="10">10/kg</option>
-        <option value="20">20/kg</option>
-        <option value="30">30/kg</option>
-      </>
-    );
-    return options;
+  const optionQuantity = (el: Products) => {
+    return Array.from({ length: el.quantityInStock }, (_, index) => (
+      <option key={index + 1} value={index + 1}>
+        {index + 1}
+      </option>
+    ));
   };
 
+  
   useEffect(() => {
     dispatch({
       type: TOT_CART,
@@ -104,7 +104,7 @@ const Order = () => {
                     id="1"
                     onChange={(e) => cartAdd(el, e)}
                   >
-                    {optionQuantity()}
+                    {optionQuantity(el)}
                   </select>
                   <p>quantity:{el.cartQuantity}/kg</p>
                   <div className="checkout-btn">
@@ -112,6 +112,7 @@ const Order = () => {
                   </div>
                 </div>
               ))}
+              <span>Tot carrello: {cartSumAmount()}€</span>
             </div>
           </div>
           <div>

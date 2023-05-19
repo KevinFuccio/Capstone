@@ -70,7 +70,7 @@ const Navbar = () => {
           <div className="loginDiv">
             <button className="shoppingCart" onClick={() => navigate("/cart")}>
               <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
-              {loggedUser.user.cart.productsItems.length}
+              {cartSum()}
             </button>
             <div>bentornato {loggedUser.user.username}!</div>
             <button onClick={handleLogout}>Logout</button>
