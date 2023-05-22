@@ -1,17 +1,8 @@
-.MainPageBody-wrapper{
-    .h3Box{
-        display: flex;
-        padding: 20px;
-        justify-content: space-between;
-        h3{
-            text-align: start;
-        }
 
-    }
     .MainPageBody{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: start;
         .product-card-wrapper{
             display: flex;
             flex-direction: column;
@@ -29,4 +20,3 @@
         text-decoration: none;
         color: black;
     }
-}

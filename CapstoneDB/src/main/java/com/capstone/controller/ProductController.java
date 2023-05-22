@@ -32,6 +32,10 @@ public class ProductController {
 	public ResponseEntity<List<Product>> productByType(@PathVariable Category_Name name){
 		return new ResponseEntity<List<Product>>(productRepo.findByProductCategory_Name(name),HttpStatus.OK);
 	}
+	@GetMapping("/name/{name}")
+	public ResponseEntity<List<Product>> productByName(@PathVariable String name){
+		return new ResponseEntity<List<Product>>(productRepo.findByNameContainingIgnoreCase(name),HttpStatus.OK);
+	}
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> singleProduct(@PathVariable Long id){
 		return new ResponseEntity<Product>(productRepo.findById(id).get(),HttpStatus.OK);

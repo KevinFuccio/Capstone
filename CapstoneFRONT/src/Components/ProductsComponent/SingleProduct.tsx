@@ -132,7 +132,7 @@ const SingleProduct = () => {
         <>
           <Navbar />
           <div style={{ display: "flex" }}>
-            <Link to={"/"}>Go back</Link>
+            <Link to={`/products/category/${product.productCategory.name}`}>Go back</Link>
             <h2 className="product-name">{product.name}</h2>
           </div>
           <div className="product-wrapper">
@@ -147,7 +147,7 @@ const SingleProduct = () => {
                 <div className="product-description">{product.description}</div>
                 <div className="product-price">
                   {product.price}
-                  <span>€/kg</span>
+                  {product.productCategory.name === "FOOD"?<span>€/kg</span>:<span>€</span>}
                 </div>
               </div>
             </div>

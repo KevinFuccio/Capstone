@@ -9,4 +9,5 @@ import com.capstone.enums.Category_Name;
 
 public interface ProductRepository extends JpaRepository<Product, Long>{
 	List<Product> findByProductCategory_Name(Category_Name categoryName);
+	List<Product> findByNameContainingIgnoreCase(String name);
 }

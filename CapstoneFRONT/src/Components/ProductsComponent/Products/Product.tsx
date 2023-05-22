@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchProducts } from "../../../Redux/ActionTypes";
 import { RootState } from "../../../Redux/Store";
 import { Products } from "../../../Redux/Interface";
+import Navbar from "../../NavComponent/Navbar";
 
 const Product = ()=>{
     const loggedUser = useSelector((state: RootState) => state.user);
@@ -18,8 +19,9 @@ const Product = ()=>{
       })();
     }, []);
     return (
+      <>
+      <Navbar/>
       <div className="MainPageBody-wrapper">
-        
         <div className="MainPageBody mo5">
           {products?.map((el, i) => (
             <div className="product-card-wrapper" key={i}>
@@ -39,6 +41,7 @@ const Product = ()=>{
           ))}
         </div>
       </div>
+      </>
     );
 }
 export default Product;

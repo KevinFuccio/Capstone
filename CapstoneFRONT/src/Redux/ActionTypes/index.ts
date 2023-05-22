@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../Store";
 
 export const PRODUCT_FETCH_ALL = "api/products/category/";
+export const PRODUCT_FETCH_BY_NAME = "api/products/name/";
 export const PRODUCT_FETCH_BY_ID = "api/products/";
 export const COMMENT_POST = "api/comments/";
 export const USER = "USER";
@@ -92,3 +93,9 @@ export const postComment = async(obj:commmentPost,user:Registration)=>{
     
   }
 }
+export const getProductByName = async (name: string) => {
+  try {
+    const response = await axio.get(PRODUCT_FETCH_BY_NAME + name);
+    return response.data;
+  } catch (error) {}
+};

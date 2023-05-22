@@ -2,12 +2,13 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./NavBar.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
-import { USER } from "../../Redux/ActionTypes";
+import { USER, getProductByName } from "../../Redux/ActionTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Navbar = () => {
   const loggedUser = useSelector((state: RootState) => state.user);
@@ -15,6 +16,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   //const totalProducts = [...loggedUser.user.cart.productsItems]
   //console.log(totalProducts);
+  const [search,setSearch] = useState("")
 
   const cartSum = () => {
     let totalQty = 0;
@@ -37,8 +39,11 @@ const Navbar = () => {
       payload: {},
     });
   };
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async(e: any) => {
     e.preventDefault();
+    await getProductByName(search)
+    navigate(`/result/${search}`)
+
   };
 
   return (
@@ -46,12 +51,11 @@ const Navbar = () => {
       <div className="navbar_main">
         <div className="links">
           <Link to={"/"}>Home</Link>
-          <Link to={"/products"}>Prodotti</Link>
         </div>
         <div className="navbar-form-wrapper">
           <form onSubmit={handleSubmit}>
             <label htmlFor="searchBar"></label>
-            <input type="text" id="searchBar" className="search" />
+            <input type="text" id="searchBar" className="search" value={search} onChange={(e)=> setSearch(e.currentTarget.value)}/>
             <button className="searchBtn">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
@@ -70,7 +74,8 @@ const Navbar = () => {
           <div className="loginDiv">
             <button className="shoppingCart" onClick={() => navigate("/cart")}>
               <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
-              {cartSum()}
+              <span>{cartSum()}</span>
+              
             </button>
             <div>bentornato {loggedUser.user.username}!</div>
             <button onClick={handleLogout}>Logout</button>

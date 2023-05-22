@@ -13,6 +13,7 @@ import Order from './Components/OrderComponent/Order';
 import ThankYou from './Components/ThankYouComponent/ThankYou';
 import SingleProduct from './Components/ProductsComponent/SingleProduct';
 import Product from './Components/ProductsComponent/Products/Product';
+import SearchResult from './Components/SearchResultComponent/SearchResult';
 // declare const google: any;
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
           <Route path='/thankYou/:name' element={<ThankYou/>}/>
           <Route path='/products/:id' element={<SingleProduct/>}/>
           <Route path='/products/category/:category' element={<Product/>}/>
+          <Route path='/result/:search' element={<SearchResult/>}/>
         </Routes>
       </BrowserRouter>
     </div>
