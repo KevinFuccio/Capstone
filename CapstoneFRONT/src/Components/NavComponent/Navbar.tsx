@@ -41,8 +41,10 @@ const Navbar = () => {
   };
   const handleSubmit = async(e: any) => {
     e.preventDefault();
-    await getProductByName(search)
-    navigate(`/result/${search}`)
+    if(search !== ""){
+      await getProductByName(search)
+      navigate(`/result/${search}`)
+    }
 
   };
 
