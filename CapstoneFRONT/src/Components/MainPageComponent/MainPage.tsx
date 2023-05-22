@@ -14,7 +14,12 @@ const MainPage = ()=>{
             <Navbar/>
             <MainPageHeader/>
         </div>
-            <MainPageBody/>
+        <div className="mainBody">
+        <h2>Alcuni prodotti:</h2>
+            <MainPageBody typeProduct={"FOOD"}/>
+            <MainPageBody typeProduct={"CONSERVE"}/>
+            <MainPageBody typeProduct={"PLANT"}/>
+        </div>
         </>
     )
 };

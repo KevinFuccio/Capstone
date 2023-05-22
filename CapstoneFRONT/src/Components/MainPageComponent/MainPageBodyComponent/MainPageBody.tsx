@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CART_ADD, fetchProducts, PRODUCTS } from "../../../Redux/ActionTypes";
 import { Products } from "../../../Redux/Interface";
@@ -6,30 +6,25 @@ import { RootState } from "../../../Redux/Store";
 import "./MainPageBody.scss";
 import { Link } from "react-router-dom";
 
-const MainPageBody = () => {
+const MainPageBody = ({ typeProduct }: { typeProduct: string }) => {
   const loggedUser = useSelector((state: RootState) => state.user);
-  const products = useSelector((state: RootState) => state.products.products);
+  const [products, setProducts] = useState([] as Products[]);
   const dispatch = useDispatch();
-  const cartAdd = (obj: Products) => {
-    dispatch({
-      type: CART_ADD,
-      payload: obj,
-    });
-  };
+
   useEffect(() => {
     (async () => {
-      let data = await fetchProducts();
-      dispatch({
-        type: PRODUCTS,
-        payload: data,
-      });
+      let data = await fetchProducts(typeProduct);
+      setProducts(data);
     })();
-  }, [products.length]);
+  }, []);
   return (
     <div className="MainPageBody-wrapper">
-      <h2>Alcuni prodotti:</h2>
+      <div className="h3Box mo5">
+      <h3>sfoglia tutti</h3>
+      <Link to={`/products/category/${typeProduct}`}>vedi tutti</Link>
+      </div>
       <div className="MainPageBody mo5">
-        {products?.map((el, i) => (
+        {products?.slice(0, 4).map((el, i) => (
           <div className="product-card-wrapper" key={i}>
             <div className="product-card">
               <Link to={`/products/${el.id}`}>

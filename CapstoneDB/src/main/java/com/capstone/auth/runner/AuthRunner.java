@@ -64,7 +64,7 @@ public class AuthRunner implements ApplicationRunner {
 		//setCategoryDefault();
 		//setShippingDefault();
 		//setStatusOrderDefault();
-		addVariantToProduct();
+		//addVariantToProduct();
 		
 	}
 	
@@ -101,7 +101,7 @@ public class AuthRunner implements ApplicationRunner {
 		plant.setName(Category_Name.PLANT);
 		productRepo.save(plant);
 		ProductCategory seed = new ProductCategory();
-		seed.setName(Category_Name.SEED);
+		seed.setName(Category_Name.CONSERVE);
 		productRepo.save(seed);		
 	}
 	private void setShippingDefault() {

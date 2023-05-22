@@ -41,15 +41,22 @@ export interface Products {
   name: string;
   price: number;
   productCategory: {
-    id:number,
-    name:string
+    id: number;
+    name: string;
   };
-  productVariant:{
-    id:number,
-    variant:string
-  }
+  productVariant: {
+    id: number;
+    variant: string;
+  };
+  comments: comment[];
   quantityInStock: number;
-  cartQuantity:number;
+  cartQuantity: number;
+}
+export interface comment {
+  id: number;
+  user: Registration;
+  comment: string;
+  valutation: number;
 }
 export interface Address {
   id: number;
@@ -70,34 +77,37 @@ export interface AddPayload {
 export interface CartActionPayload {
   cartSumAmount: number;
   cartSumQuantity: number;
-  
 }
-
-
+export interface commmentPost {
+  user_id: number;
+  product_id: number;
+  comment: string;
+  valutation: number;
+}
 
 //interface of PayPal order returned
 export interface PaypalInterface {
-  id:             string;
-  intent:         string;
-  status:         string;
+  id: string;
+  intent: string;
+  status: string;
   purchase_units: PurchaseUnit[];
-  payer:          Payer;
-  create_time:    Date;
-  update_time:    Date;
-  links:          Link[];
+  payer: Payer;
+  create_time: Date;
+  update_time: Date;
+  links: Link[];
 }
 
 export interface Link {
-  href:   string;
-  rel:    string;
+  href: string;
+  rel: string;
   method: string;
 }
 
 export interface Payer {
-  name:          PayerName;
+  name: PayerName;
   email_address: string;
-  payer_id:      string;
-  address:       PayerAddress;
+  payer_id: string;
+  address: PayerAddress;
 }
 
 export interface PayerAddress {
@@ -106,49 +116,49 @@ export interface PayerAddress {
 
 export interface PayerName {
   given_name: string;
-  surname:    string;
+  surname: string;
 }
 
 export interface PurchaseUnit {
   reference_id: string;
-  amount:       Amount;
-  payee:        Payee;
-  description:  string;
-  items:        Item[];
-  shipping:     Shipping;
-  payments:     Payments;
+  amount: Amount;
+  payee: Payee;
+  description: string;
+  items: Item[];
+  shipping: Shipping;
+  payments: Payments;
 }
 
 export interface Amount {
   currency_code: string;
-  value:         string;
-  breakdown:     Breakdown;
+  value: string;
+  breakdown: Breakdown;
 }
 
 export interface Breakdown {
-  item_total:        Handling;
-  shipping:          Handling;
-  handling:          Handling;
-  insurance:         Handling;
+  item_total: Handling;
+  shipping: Handling;
+  handling: Handling;
+  insurance: Handling;
   shipping_discount: Handling;
 }
 
 export interface Handling {
   currency_code: string;
-  value:         string;
+  value: string;
 }
 
 export interface Item {
-  name:        string;
+  name: string;
   unit_amount: Handling;
-  tax:         Handling;
-  quantity:    string;
-  image_url:   string;
+  tax: Handling;
+  quantity: string;
+  image_url: string;
 }
 
 export interface Payee {
   email_address: string;
-  merchant_id:   string;
+  merchant_id: string;
 }
 
 export interface Payments {
@@ -156,32 +166,32 @@ export interface Payments {
 }
 
 export interface Capture {
-  id:                string;
-  status:            string;
-  amount:            Handling;
-  final_capture:     boolean;
+  id: string;
+  status: string;
+  amount: Handling;
+  final_capture: boolean;
   seller_protection: SellerProtection;
-  create_time:       Date;
-  update_time:       Date;
+  create_time: Date;
+  update_time: Date;
 }
 
 export interface SellerProtection {
-  status:             string;
+  status: string;
   dispute_categories: string[];
 }
 
 export interface Shipping {
-  name:    ShippingName;
+  name: ShippingName;
   address: ShippingAddress;
 }
 
 export interface ShippingAddress {
   address_line_1: string;
   address_line_2: string;
-  admin_area_2:   string;
-  admin_area_1:   string;
-  postal_code:    string;
-  country_code:   string;
+  admin_area_2: string;
+  admin_area_1: string;
+  postal_code: string;
+  country_code: string;
 }
 
 export interface ShippingName {

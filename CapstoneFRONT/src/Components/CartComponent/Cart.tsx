@@ -100,7 +100,7 @@ const Cart = () => {
         <div key={i} className="cart-items">
           <p>{el.name}</p>
           <img src={el.image} alt="" style={{ height: "60px" }} />
-          <p>{( el.productCategory.name === "FOOD"? foodTypeConverter(el) +"/kg" :"")}</p>
+          <p>Tipologia: {( el.productCategory.name === "FOOD"? foodTypeConverter(el) +"/kg" :"")} </p>
           <select
             value={el.cartQuantity}
             name="options"

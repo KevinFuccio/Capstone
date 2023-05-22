@@ -1,8 +1,11 @@
-import { Products, Registration } from "../Interface";
+import { Products, Registration, comment, commmentPost } from "../Interface";
 import axio from "../../api/axio";
+import { useSelector } from "react-redux";
+import { RootState } from "../Store";
 
-export const PRODUCT_FETCH_ALL = "api/products/all";
+export const PRODUCT_FETCH_ALL = "api/products/category/";
 export const PRODUCT_FETCH_BY_ID = "api/products/";
+export const COMMENT_POST = "api/comments/";
 export const USER = "USER";
 export const SHOPPING_ADD = "SHOPPING_ADD";
 export const PRODUCTS = "PRODUCTS";
@@ -13,6 +16,7 @@ export const TOT_CART = "TOT_CART";
 export const CART_CLEAR = "CART_CLEAR";
 export const CART_ADD_FIX ="CART_ADD_FIX"
 export const CART_MODIFY_VARIANT = "CART_MODIFY_VARIANT";
+
 
 let url = "http://localhost:8080/api/auth/register";
 
@@ -66,9 +70,9 @@ export const registerFetch = async (body: Registration) => {
     body: JSON.stringify(body),
   });
 };
-export const fetchProducts = async () => {
+export const fetchProducts = async (category:string) => {
   try {
-    const response = await axio.get(PRODUCT_FETCH_ALL);
+    const response = await axio.get(PRODUCT_FETCH_ALL+category);
     return response.data;
   } catch (error) {}
 };
@@ -78,3 +82,13 @@ export const getProductById = async (id: string) => {
     return response.data;
   } catch (error) {}
 };
+
+export const postComment = async(obj:commmentPost,user:Registration)=>{
+  try {
+    const response = await axio.post(COMMENT_POST,JSON.stringify(obj),{headers:{"Content-Type":"application/json",Authorization: `Bearer ${user.accessToken}`}})
+  } catch (error) {
+    console.log(error);
+    
+    
+  }
+}

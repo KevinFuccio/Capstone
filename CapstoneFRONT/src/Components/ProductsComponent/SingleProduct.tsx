@@ -1,18 +1,45 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { CART_ADD, CART_MODIFY, CART_MODIFY_VARIANT, getProductById } from "../../Redux/ActionTypes";
-import { Products } from "../../Redux/Interface";
-import "./Products.scss";
+import {
+  CART_ADD,
+  CART_MODIFY,
+  CART_MODIFY_VARIANT,
+  getProductById,
+  postComment,
+} from "../../Redux/ActionTypes";
+import { Products, comment, commmentPost } from "../../Redux/Interface";
+import "./SingleProduct.scss";
 import Navbar from "../NavComponent/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
 
-const Product = () => {
+const SingleProduct = () => {
   const loggedUser = useSelector((state: RootState) => state.user);
   const { id } = useParams();
   const [product, setProduct] = useState({} as Products);
   const dispatch = useDispatch();
 
+  const [comment, setComment] = useState({
+    user_id: loggedUser.user.id,
+    product_id: product?.id,
+    comment: "",
+    valutation: 1,
+  });
+
+  const handleChange = (e: any) => {
+    setComment({
+      ...comment,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = async (e: any, obj: commmentPost) => {
+    e.preventDefault();
+    if (comment.comment) {
+      await postComment(obj, loggedUser.user);
+      setProduct(await getProductById(id as string));
+      console.log("a");
+    }
+  };
 
   const optionCategory = () => {
     const options = (
@@ -35,8 +62,10 @@ const Product = () => {
     return options;
   };
 
-
-  const options = product.productCategory?.name === "FOOD"? optionCategory():optionCategory2()
+  const options =
+    product.productCategory?.name === "FOOD"
+      ? optionCategory()
+      : optionCategory2();
   const optionQuantity = () => {
     return Array.from({ length: product.quantityInStock }, (_, index) => (
       <option key={index + 1} value={index + 1}>
@@ -50,12 +79,12 @@ const Product = () => {
   );
 
   const [selectQuantity, setSelectQuantity] = useState(
-    optionQuantity().length > 0? optionQuantity()[0].props.value.toString() : "1"
+    optionQuantity().length > 0
+      ? optionQuantity()[0].props.value.toString()
+      : "1"
   );
 
-  
-
-  const cartAdd = (obj: Products, e: string,qty:string) => {
+  const cartAdd = (obj: Products, e: string, qty: string) => {
     let variant;
     switch (e) {
       case "S":
@@ -70,7 +99,7 @@ const Product = () => {
       default:
         return;
     }
-    console.log(obj,e,qty);
+    console.log(obj, e, qty);
 
     const object1 = {
       ...obj,
@@ -79,25 +108,32 @@ const Product = () => {
 
     dispatch({
       type: CART_ADD,
-      payload: {object1,qty:qty},
+      payload: { object1, qty: qty },
     });
   };
-
-  
 
   useEffect(() => {
     (async () => {
       setProduct(await getProductById(id as string));
     })();
   }, [id]);
+
+  useEffect(() => {
+    if (product.id !== undefined) {
+      setComment({
+        ...comment,
+        product_id: product?.id,
+      });
+    }
+  }, [product]);
   return (
     <div>
       {product.id ? (
         <>
           <Navbar />
-          <div style={{display:"flex"}}>
-          <Link to={"/"}>Go back</Link>
-          <h2 className="product-name">{product.name}</h2>
+          <div style={{ display: "flex" }}>
+            <Link to={"/"}>Go back</Link>
+            <h2 className="product-name">{product.name}</h2>
           </div>
           <div className="product-wrapper">
             <div className="pdw-box">
@@ -132,10 +168,7 @@ const Product = () => {
                   name="options"
                   id="1"
                   onChange={(e) => {
-                    
                     setSelectEvent(e.currentTarget.value);
-                    
-                    
                   }}
                 >
                   {options}
@@ -146,8 +179,7 @@ const Product = () => {
                   name="options-quantity"
                   id="2"
                   onChange={(e) => {
-                   
-                    setSelectQuantity(e.currentTarget.value)
+                    setSelectQuantity(e.currentTarget.value);
                     console.log(e.currentTarget.value);
                   }}
                 >
@@ -155,7 +187,9 @@ const Product = () => {
                 </select>
                 <div className="AddToCartBtn">
                   <button
-                    onClick={() => cartAdd(product, selectEvent,selectQuantity)}
+                    onClick={() =>
+                      cartAdd(product, selectEvent, selectQuantity)
+                    }
                     disabled={!loggedUser.user.username ? true : false}
                   >
                     Aggiungi al carrello
@@ -164,6 +198,46 @@ const Product = () => {
               </div>
             </div>
           </div>
+          <div>
+            <p>commenti:</p>
+
+            <div>
+              <h4>Vuoi lasciare un commento su questo prodotto?</h4>
+              <form onSubmit={(e) => handleSubmit(e, comment)}>
+                <input
+                  type="text"
+                  name="comment"
+                  value={comment.comment}
+                  onChange={(e) => handleChange(e)}
+                />
+                <select
+                  name="valutation"
+                  id=""
+                  onChange={(e) => handleChange(e)}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <button>invia</button>
+              </form>
+            </div>
+          </div>
+          {product?.comments?.length !== 0 ? (
+            <>
+              {product?.comments.map((e, i) => (
+                <div key={i}>
+                  <h5>Utente: {e.user.username}</h5>
+                  <p>{e.comment}</p>
+                  <p>Valutazione: {e.valutation}</p>
+                </div>
+              ))}
+            </>
+          ) : (
+            <div>non ci sono commenti</div>
+          )}
         </>
       ) : (
         <div></div>
@@ -172,4 +246,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default SingleProduct;

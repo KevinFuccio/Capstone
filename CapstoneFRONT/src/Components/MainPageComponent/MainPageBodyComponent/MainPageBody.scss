@@ -1,7 +1,12 @@
 .MainPageBody-wrapper{
-    h2{
-        text-align: start;
+    .h3Box{
+        display: flex;
         padding: 20px;
+        justify-content: space-between;
+        h3{
+            text-align: start;
+        }
+
     }
     .MainPageBody{
         display: flex;

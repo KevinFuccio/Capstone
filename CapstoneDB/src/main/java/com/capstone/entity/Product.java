@@ -1,7 +1,12 @@
 package com.capstone.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -31,6 +36,9 @@ public class Product {
 	private ProductCategory productCategory;
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
 	private Set<ProductVariant> productVariant = new HashSet<>();
+	@JsonIgnoreProperties(value = "product")
+	@OneToMany(mappedBy = "product")
+	private List<Comments> comments= new ArrayList<>();
 	
 	
 }
