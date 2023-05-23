@@ -56,6 +56,7 @@ export interface comment {
   id: number;
   user: Registration;
   comment: string;
+  published:Date;
   valutation: number;
 }
 export interface Address {

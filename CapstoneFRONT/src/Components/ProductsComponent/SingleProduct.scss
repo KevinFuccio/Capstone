@@ -5,7 +5,7 @@
 }
 .product-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-top: 30px;
   min-height: 500px;
   .product-image {
@@ -20,7 +20,6 @@
         font-size: 12px;
         text-align: left;
         padding: 5px 0px 5px 5px;
-    
       }
       .product-description {
         text-align: start;
@@ -53,18 +52,18 @@
         font-weight: 400;
       }
     }
-    h5{
-        padding-top: 40px;
-        text-align: start;
+    h5 {
+      padding-top: 40px;
+      text-align: start;
     }
-    .divSelect{
+    .divSelect {
       text-align: start;
       padding-top: 10px;
     }
-    .AddToCartBtn{
+    .AddToCartBtn {
       text-align: center;
       padding-top: 15px;
-      button{
+      button {
         cursor: pointer;
         font-weight: bolder;
         font-size: small;
@@ -72,10 +71,49 @@
         height: 35px;
         background-color: #ff8400;
         border: 1px solid #292823;
-      
-
       }
     }
   }
+}
+.comment-form-wrapper {
+  .comment-form {
+    form{
+      input{
 
+        border-radius: 5px;
+          height: 20px;
+          margin: 5px 0px;
+          border: 1px solid;
+          &:focus{
+               outline: none;
+             }
+      }
+    }
+   button{
+    border:none;
+    background-color: #ff8400;
+    font-size: larger;
+    width: 80px;
+    border-radius: 5px;
+    padding: 5px
+    
+   }
+  }
+}
+.comment-h3{
+  margin: 15px 0px;
+}
+.comment-wrapper {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  border: 0.5px solid rgb(235, 235, 235);
+  padding: 25px;
+
+  .comment-section {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

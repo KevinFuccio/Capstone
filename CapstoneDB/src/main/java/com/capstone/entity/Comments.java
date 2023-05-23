@@ -1,5 +1,8 @@
 package com.capstone.entity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import com.capstone.auth.entity.User;
 
 import jakarta.persistence.Entity;
@@ -20,6 +23,7 @@ public class Comments {
 	@ManyToOne
 	private Product product;
 	private String comment;
+	private LocalDate published = LocalDate.now();
 	private int valutation;
 
 }

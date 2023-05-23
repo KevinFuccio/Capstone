@@ -17,7 +17,7 @@ const Cart = () => {
   const loggedUser = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const[change,setChange] = useState(0);
+  const [change, setChange] = useState(0);
 
   const cartSumAmount = () => {
     let singlePrice = 0;
@@ -25,17 +25,16 @@ const Cart = () => {
     if (loggedUser.user.cart.productsItems.length > 0) {
       singlePrice = loggedUser.user?.cart.productsItems.reduce(
         (acc, product) => {
-          let n = foodTypeConverter(product)
+          let n = foodTypeConverter(product);
 
-        return acc + (product.price * n) * product.cartQuantity;
+          return acc + product.price * n * product.cartQuantity;
         },
         0
       );
     } else {
       return 0;
     }
-    
-    
+
     return Number(singlePrice).toFixed(2);
   };
   const cartSumQuantity = () => {
@@ -43,7 +42,7 @@ const Cart = () => {
 
     if (loggedUser.user.cart.productsItems.length > 0) {
       totalQty = loggedUser.user?.cart.productsItems.reduce((acc, product) => {
-        return acc + product.cartQuantity
+        return acc + product.cartQuantity;
       }, 0);
     } else {
       return totalQty;
@@ -85,7 +84,7 @@ const Cart = () => {
         cartSumQuantity: cartSumQuantity(),
       },
     });
-  }, [cartSumAmount(),change]);
+  }, [cartSumAmount(), change]);
 
   return (
     <div>
@@ -95,37 +94,49 @@ const Cart = () => {
       ) : (
         <div>elementi nel carrello</div>
       )}
-
-      {loggedUser?.user.cart.productsItems.map((el, i) => (
-        <div key={i} className="cart-items">
-          <p>{el.name}</p>
-          <img src={el.image} alt="" style={{ height: "60px" }} />
-          <p>Tipologia: {( el.productCategory.name === "FOOD"? foodTypeConverter(el) +"/kg" :"")} </p>
-          <select
-            value={el.cartQuantity}
-            name="options"
-            id="1"
-            onChange={(e) => {
-              cartAdd(el, e)
-              setChange(change+1);
-            }}
-          >
-            {optionQuantity(el)}
-          </select>
-          <p>quantity:{el.cartQuantity}</p>
-          <button onClick={() => cartRemove(el)}>-</button>
+      <div className="cart-items-box">
+        {loggedUser?.user.cart.productsItems.map((el, i) => (
+          <div key={i} className="cart-items-wrapper">
+            <div className="cart-items">
+              <div className="cart-item">
+              <img src={el.image} alt="" style={{ height: "80px" }} />
+              <p>{el.name}</p>
+              <p>
+                Pacco da:{" "}
+                {el.productCategory.name === "FOOD"
+                  ? foodTypeConverter(el) + "/kg"
+                  : ""}{" "}
+              </p>
+              <select
+                value={el.cartQuantity}
+                name="options"
+                id="1"
+                onChange={(e) => {
+                  cartAdd(el, e);
+                  setChange(change + 1);
+                }}
+              >
+                {optionQuantity(el)}
+              </select>
+              <p>quantity:{el.cartQuantity}</p>
+              </div>
+              <button onClick={() => cartRemove(el)}>-</button>
+            </div>
+          </div>
+        ))}
+        <div className="order-box">
+          <span>Tot carrello: {cartSumAmount()}€</span>
+          <div>
+            <button
+              disabled={
+                loggedUser.user.cart.productsItems.length === 0 ? true : false
+              }
+              onClick={() => navigate("/order")}
+            >
+              procedi all'ordine
+            </button>
+          </div>
         </div>
-      ))}
-      <span>Tot carrello: {cartSumAmount()}€</span>
-      <div>
-        <button
-          disabled={
-            loggedUser.user.cart.productsItems.length === 0 ? true : false
-          }
-          onClick={() => navigate("/order")}
-        >
-          procedi all'ordine
-        </button>
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 import { Products, Registration, comment, commmentPost } from "../Interface";
 import axio from "../../api/axio";
-import { useSelector } from "react-redux";
-import { RootState } from "../Store";
 
 export const PRODUCT_FETCH_ALL = "api/products/category/";
 export const PRODUCT_FETCH_BY_NAME = "api/products/name/";
@@ -74,6 +72,12 @@ export const registerFetch = async (body: Registration) => {
 export const fetchProducts = async (category:string) => {
   try {
     const response = await axio.get(PRODUCT_FETCH_ALL+category);
+    return response.data;
+  } catch (error) {}
+};
+export const fetchProductsAll = async () => {
+  try {
+    const response = await axio.get(PRODUCT_FETCH_BY_ID+"all");
     return response.data;
   } catch (error) {}
 };

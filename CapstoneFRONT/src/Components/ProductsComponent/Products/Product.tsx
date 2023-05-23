@@ -6,12 +6,12 @@ import { RootState } from "../../../Redux/Store";
 import { Products } from "../../../Redux/Interface";
 import Navbar from "../../NavComponent/Navbar";
 import { Rating } from "react-simple-star-rating";
+import "../Products/Product.scss"
 
 const Product = ()=>{
     const loggedUser = useSelector((state: RootState) => state.user);
     const [products, setProducts] = useState([] as Products[]);
     const {category} = useParams();
-    const dispatch = useDispatch();
   
     useEffect(() => {
       (async () => {
@@ -22,7 +22,7 @@ const Product = ()=>{
     return (
       <>
       <Navbar/>
-      <div className="MainPageBody-wrapper">
+      <div className="MainPageBody-wrapper-2">
         <div className="MainPageBody mo5">
           {products?.map((el, i) => (
             <div className="product-card-wrapper" key={i}>

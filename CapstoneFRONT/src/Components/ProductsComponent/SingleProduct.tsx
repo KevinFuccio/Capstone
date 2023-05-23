@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
 import RatingStar from "../RatingComponent/RatingStar";
 import { Rating } from "react-simple-star-rating";
+import moment from "moment";
 
 const SingleProduct = () => {
   const loggedUser = useSelector((state: RootState) => state.user);
@@ -77,9 +78,6 @@ const SingleProduct = () => {
     );
     return options;
   };
-  
-  
-  
 
   const options =
     product.productCategory?.name === "FOOD"
@@ -150,20 +148,30 @@ const SingleProduct = () => {
       setResetRating(false);
     }
   }, [resetRating]);
+
   return (
     <div>
       {product.id ? (
         <>
           <Navbar />
-          <div style={{ display: "flex" }}>
-            <div style={{ display: "flex", alignItems: "start" }}>
+          <div style={{ display: "flex" }} className="mo5">
+            <div style={{ display: "flex", alignItems: "start" }} >
               <h2 className="product-name">{product.name}</h2>
-              <p style={{paddingLeft:"10px"}}>
-                <Rating initialValue={calculateStarRating(product)?calculateStarRating(product):0} readonly allowFraction size={13} />
+              <p style={{ paddingLeft: "10px" }}>
+                <Rating
+                  initialValue={
+                    calculateStarRating(product)
+                      ? calculateStarRating(product)
+                      : 0
+                  }
+                  readonly
+                  allowFraction
+                  size={13}
+                />
               </p>
             </div>
           </div>
-          <div className="product-wrapper">
+          <div className="product-wrapper mo5">
             <div className="pdw-box">
               <img src={product.image} alt="" className="product-image" />
               <div className="pdw">
@@ -194,7 +202,7 @@ const SingleProduct = () => {
                 <h5 style={{ color: "red" }}>Scorte esaurite</h5>
               )}
               <div className="divSelect">
-                Taglia:
+                Pacco:
                 <select
                   value={selectEvent}
                   name="options"
@@ -230,37 +238,46 @@ const SingleProduct = () => {
               </div>
             </div>
           </div>
-          <div>
-            <p>commenti:</p>
-
-            <div>
-              <h4>Vuoi lasciare un commento su questo prodotto?</h4>
-              <form onSubmit={(e) => handleSubmit(e, comment)}>
-                <input
-                  type="text"
-                  name="comment"
-                  value={comment.comment}
-                  onChange={(e) => handleChange(e)}
-                />
-                <RatingStar
-                  onRatingChange={handleRating}
-                  resetRating={resetRating}
-                />
-                <button>invia</button>
-              </form>
+          <div className="comment-form-wrapper">
+            <div className="comment-form">
+              
+              <div>
+                <h4>Vuoi lasciare un commento su questo prodotto?</h4>
+                <form onSubmit={(e) => handleSubmit(e, comment)}>
+                  <input
+                    type="text"
+                    name="comment"
+                    autoComplete="off"
+                    value={comment.comment}
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <RatingStar
+                    onRatingChange={handleRating}
+                    resetRating={resetRating}
+                  />
+                  <button>invia</button>
+                </form>
+              </div>
             </div>
           </div>
           {product?.comments?.length !== 0 ? (
             <>
-              {product?.comments.map((e, i) => (
-                <div key={i}>
-                  <h5>{e.user.username}</h5>
-                  <p>{e.comment}</p>
-                  <p>
-                    <Rating size={15} readonly initialValue={e.valutation} />
-                  </p>
-                </div>
-              ))}
+              <h3 className="comment-h3">Commenti:</h3>
+              <div className="comment-wrapper mo5">
+                {product?.comments.map((e, i) => (
+                  <div className="comment-section" key={i}>
+                    <h5>{e.user.username}</h5>
+                    <p>{e.comment}</p>
+                    <p>
+                      <Rating size={15} readonly initialValue={e.valutation} />
+                    </p>
+                    <p>
+                      Pubblicato il:&nbsp;
+                      {moment(e.published.toString()).format("DD-MM-YYYY")}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </>
           ) : (
             <div>non ci sono commenti</div>
