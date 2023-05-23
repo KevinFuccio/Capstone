@@ -99,3 +99,17 @@ export const getProductByName = async (name: string) => {
     return response.data;
   } catch (error) {}
 };
+
+export const calculateTotalRating = (product:Products) => {
+  let totalSum = product.comments.reduce((acc,reducer)=>{
+    return acc + reducer.valutation
+  },0)
+  return totalSum;
+};
+export const calculateStarRating = (product:Products) => {
+  const totalSum = calculateTotalRating(product);
+  const average = totalSum / product.comments.length;
+  const starRating = Math.max(average);
+  
+  return starRating;
+}

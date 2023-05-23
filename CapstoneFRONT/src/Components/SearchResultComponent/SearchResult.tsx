@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getProductByName } from "../../Redux/ActionTypes";
+import { calculateStarRating, getProductByName } from "../../Redux/ActionTypes";
 import Navbar from "../NavComponent/Navbar";
 import { Products } from "../../Redux/Interface";
 import "./SearchResult.scss";
+import { Rating } from "react-simple-star-rating";
 
 const SearchResult = () => {
   const { search } = useParams();
@@ -17,9 +18,6 @@ const SearchResult = () => {
   return (
     <>
       <Navbar />
-      <div>
-        <h3>Elementi trovati: {items.length}</h3>
-      </div>
       {items.length !== 0 ? (
         <div className="MainPageBody mo5">
           {items?.map((el, i) => (
@@ -34,6 +32,7 @@ const SearchResult = () => {
               <Link to={`/products/${el.id}`}>
                 <div>
                   <p>{el.name}</p>
+                  <Rating initialValue={calculateStarRating(el)?calculateStarRating(el):0} readonly allowFraction size={13} />
                 </div>
               </Link>
             </div>

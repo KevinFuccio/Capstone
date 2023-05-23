@@ -16,7 +16,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   //const totalProducts = [...loggedUser.user.cart.productsItems]
   //console.log(totalProducts);
-  const [search,setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   const cartSum = () => {
     let totalQty = 0;
@@ -39,13 +39,12 @@ const Navbar = () => {
       payload: {},
     });
   };
-  const handleSubmit = async(e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if(search !== ""){
-      await getProductByName(search)
-      navigate(`/result/${search}`)
+    if (search !== "") {
+      await getProductByName(search);
+      navigate(`/result/${search}`);
     }
-
   };
 
   return (
@@ -57,7 +56,13 @@ const Navbar = () => {
         <div className="navbar-form-wrapper">
           <form onSubmit={handleSubmit}>
             <label htmlFor="searchBar"></label>
-            <input type="text" id="searchBar" className="search" value={search} onChange={(e)=> setSearch(e.currentTarget.value)}/>
+            <input
+              type="text"
+              id="searchBar"
+              className="search"
+              value={search}
+              onChange={(e) => setSearch(e.currentTarget.value)}
+            />
             <button className="searchBtn">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
@@ -77,7 +82,6 @@ const Navbar = () => {
             <button className="shoppingCart" onClick={() => navigate("/cart")}>
               <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
               <span>{cartSum()}</span>
-              
             </button>
             <div>bentornato {loggedUser.user.username}!</div>
             <button onClick={handleLogout}>Logout</button>

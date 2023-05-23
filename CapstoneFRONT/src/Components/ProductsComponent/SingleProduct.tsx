@@ -4,6 +4,7 @@ import {
   CART_ADD,
   CART_MODIFY,
   CART_MODIFY_VARIANT,
+  calculateStarRating,
   getProductById,
   postComment,
 } from "../../Redux/ActionTypes";
@@ -12,18 +13,21 @@ import "./SingleProduct.scss";
 import Navbar from "../NavComponent/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
+import RatingStar from "../RatingComponent/RatingStar";
+import { Rating } from "react-simple-star-rating";
 
 const SingleProduct = () => {
   const loggedUser = useSelector((state: RootState) => state.user);
   const { id } = useParams();
   const [product, setProduct] = useState({} as Products);
+  const [resetRating, setResetRating] = useState(false);
   const dispatch = useDispatch();
 
   const [comment, setComment] = useState({
     user_id: loggedUser.user.id,
     product_id: product?.id,
     comment: "",
-    valutation: 1,
+    valutation: 0,
   });
 
   const handleChange = (e: any) => {
@@ -32,12 +36,24 @@ const SingleProduct = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const handleRating = (rate: number) => {
+    setComment({
+      ...comment,
+      valutation: rate,
+    });
+  };
   const handleSubmit = async (e: any, obj: commmentPost) => {
     e.preventDefault();
-    if (comment.comment) {
+    if (comment.valutation !== 0) {
       await postComment(obj, loggedUser.user);
       setProduct(await getProductById(id as string));
-      console.log("a");
+      setComment({
+        user_id: loggedUser.user.id,
+        product_id: product?.id,
+        comment: "",
+        valutation: 0,
+      });
+      setResetRating(true);
     }
   };
 
@@ -61,6 +77,9 @@ const SingleProduct = () => {
     );
     return options;
   };
+  
+  
+  
 
   const options =
     product.productCategory?.name === "FOOD"
@@ -126,14 +145,23 @@ const SingleProduct = () => {
       });
     }
   }, [product]);
+  useEffect(() => {
+    if (resetRating) {
+      setResetRating(false);
+    }
+  }, [resetRating]);
   return (
     <div>
       {product.id ? (
         <>
           <Navbar />
           <div style={{ display: "flex" }}>
-            <Link to={`/products/category/${product.productCategory.name}`}>Go back</Link>
-            <h2 className="product-name">{product.name}</h2>
+            <div style={{ display: "flex", alignItems: "start" }}>
+              <h2 className="product-name">{product.name}</h2>
+              <p style={{paddingLeft:"10px"}}>
+                <Rating initialValue={calculateStarRating(product)?calculateStarRating(product):0} readonly allowFraction size={13} />
+              </p>
+            </div>
           </div>
           <div className="product-wrapper">
             <div className="pdw-box">
@@ -147,7 +175,11 @@ const SingleProduct = () => {
                 <div className="product-description">{product.description}</div>
                 <div className="product-price">
                   {product.price}
-                  {product.productCategory.name === "FOOD"?<span>€/kg</span>:<span>€</span>}
+                  {product.productCategory.name === "FOOD" ? (
+                    <span>€/kg</span>
+                  ) : (
+                    <span>€</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -210,17 +242,10 @@ const SingleProduct = () => {
                   value={comment.comment}
                   onChange={(e) => handleChange(e)}
                 />
-                <select
-                  name="valutation"
-                  id=""
-                  onChange={(e) => handleChange(e)}
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
+                <RatingStar
+                  onRatingChange={handleRating}
+                  resetRating={resetRating}
+                />
                 <button>invia</button>
               </form>
             </div>
@@ -229,9 +254,11 @@ const SingleProduct = () => {
             <>
               {product?.comments.map((e, i) => (
                 <div key={i}>
-                  <h5>Utente: {e.user.username}</h5>
+                  <h5>{e.user.username}</h5>
                   <p>{e.comment}</p>
-                  <p>Valutazione: {e.valutation}</p>
+                  <p>
+                    <Rating size={15} readonly initialValue={e.valutation} />
+                  </p>
                 </div>
               ))}
             </>

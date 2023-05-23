@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchProducts } from "../../../Redux/ActionTypes";
+import { calculateStarRating, fetchProducts } from "../../../Redux/ActionTypes";
 import { RootState } from "../../../Redux/Store";
 import { Products } from "../../../Redux/Interface";
 import Navbar from "../../NavComponent/Navbar";
+import { Rating } from "react-simple-star-rating";
 
 const Product = ()=>{
     const loggedUser = useSelector((state: RootState) => state.user);
@@ -35,6 +36,7 @@ const Product = ()=>{
               <Link to={`/products/${el.id}`}>
                 <div>
                   <p>{el.name}</p>
+                  <Rating initialValue={calculateStarRating(el)?calculateStarRating(el):0} readonly allowFraction size={13} />
                 </div>
               </Link>
             </div>
