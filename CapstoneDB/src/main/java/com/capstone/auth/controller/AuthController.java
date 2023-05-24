@@ -45,6 +45,8 @@ public class AuthController {
         jwtAuthResponse.setAccessToken(token);
         u.getRoles().forEach(e-> jwtAuthResponse.getRoles().add(e));
         u.getAddress().forEach(e-> jwtAuthResponse.getAddress().add(e));
+        jwtAuthResponse.setEmail(u.getEmail());
+        jwtAuthResponse.setPassword(u.getPassword());
         
         
 

@@ -2,6 +2,7 @@ import { Products, Registration, comment, commmentPost } from "../Interface";
 import axio from "../../api/axio";
 
 export const PRODUCT_FETCH_ALL = "api/products/category/";
+export const GET_ORDERS = "api/orders/";
 export const PRODUCT_FETCH_BY_NAME = "api/products/name/";
 export const PRODUCT_FETCH_BY_ID = "api/products/";
 export const COMMENT_POST = "api/comments/";
@@ -20,7 +21,7 @@ export const CART_MODIFY_VARIANT = "CART_MODIFY_VARIANT";
 let url = "http://localhost:8080/api/auth/register";
 
 export const foodTypeConverter =(product:Products)=>{
-  let n = 0;
+  let n = 1;
   if (product.productCategory.name === "FOOD") {
     switch (product.productVariant.variant) {
       case "S":
@@ -33,7 +34,7 @@ export const foodTypeConverter =(product:Products)=>{
         n = 30;
         break;
       default: {
-        return (n = 0);
+        return n ;
       }
     }
   }
@@ -117,3 +118,10 @@ export const calculateStarRating = (product:Products) => {
   
   return starRating;
 }
+
+export const getOrders = async (id: number) => {
+  try {
+    const response = await axio.get(GET_ORDERS + id);
+    return response.data;
+  } catch (error) {}
+};

@@ -31,8 +31,6 @@ const Cart = () => {
         },
         0
       );
-    } else {
-      return 0;
     }
 
     return Number(singlePrice).toFixed(2);

@@ -28,6 +28,8 @@ export interface Cart {
 export interface Registration {
   id: number;
   username: string;
+  email:string;
+  password:string
   accessToken: string;
   tokenType: string;
   roles: Roles[];

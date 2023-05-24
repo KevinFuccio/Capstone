@@ -83,7 +83,7 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
               <span>{cartSum()}</span>
             </button>
-            <div>bentornato {loggedUser.user.username}!</div>
+            <Link to={`/profile-Info/`}>{loggedUser.user.username}</Link>
             <button onClick={handleLogout}>Logout</button>
           </div>
         )}

@@ -22,6 +22,8 @@ import lombok.Setter;
 public class JWTAuthResponse {
 	private Long id;
 	private String username;
+	private String email;
+	private String password;
     private String accessToken;
     private String tokenType = "Bearer";
     private Set<Role> roles = new HashSet();

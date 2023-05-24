@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.capstone.auth.entity.User;
 import com.capstone.auth.repository.UserRepository;
 import com.capstone.entity.Address;
+import com.capstone.entity.OrderLine;
 import com.capstone.entity.PaymentMethod;
 import com.capstone.entity.ShippingMethod;
 import com.capstone.entity.ShoppingOrder;
@@ -77,8 +78,16 @@ public class ShoppingOrderService {
 		default:
 			break;
 		}
+		
+		
+		double totPrice = 0;
 
-		ShoppingOrder.getOrderLine().forEach(e -> s.setTotalPrice(e.getPrice()));
+		for (OrderLine e : ShoppingOrder.getOrderLine()) {
+		    totPrice += e.getPrice();
+		}
+
+		double roundedPrice = Math.round(totPrice * 100.0) / 100.0;
+		s.setTotalPrice(roundedPrice);
 
 
 		shoppingOrderRepo.save(s);

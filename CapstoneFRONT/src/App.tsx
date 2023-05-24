@@ -14,6 +14,9 @@ import ThankYou from './Components/ThankYouComponent/ThankYou';
 import SingleProduct from './Components/ProductsComponent/SingleProduct';
 import Product from './Components/ProductsComponent/Products/Product';
 import SearchResult from './Components/SearchResultComponent/SearchResult';
+import Profile from './Components/ProfileComponent/Profile';
+import Orders from './Components/ProfileComponent/Orders';
+import Info from './Components/ProfileComponent/Info';
 // declare const google: any;
 
 function App() {
@@ -81,6 +84,9 @@ function App() {
           <Route path='/products/:id' element={<SingleProduct/>}/>
           <Route path='/products/category/:category' element={<Product/>}/>
           <Route path='/result/:search' element={<SearchResult/>}/>
+          <Route path='/profile/:username' element={<Profile/>}/>
+          <Route path='/profile-Info/' element={<Info/>}/>
+          <Route path='/profile-Info/orders' element={<Orders/>}/>
         </Routes>
       </BrowserRouter>
     </div>

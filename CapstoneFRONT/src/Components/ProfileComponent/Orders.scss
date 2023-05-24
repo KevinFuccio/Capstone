@@ -1,0 +1,16 @@
+.order-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .order {
+    margin: 50px;
+    height: 460px;
+    width: 550px;
+    border-radius: 15px;
+    background-color: white;
+    .order-title {
+      margin: 20px;
+      text-align: start;
+    }
+  }
+}

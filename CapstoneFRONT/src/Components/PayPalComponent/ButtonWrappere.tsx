@@ -62,12 +62,12 @@ const ButtonWrapper = ({
           description: el.description,
           image: el.image,
           quantityInStock: el.quantityInStock,
-          price: foodTypeConverter(el),
+          price: Number((el.price *foodTypeConverter(el)).toFixed(2)),
           productCategory: el.productCategory,
           productVariant:[el.productVariant]
         },
         quantity: el.cartQuantity,
-        price: user.cart.cartTotalAmount,
+        price: Number(((el.price *foodTypeConverter(el))*el.cartQuantity).toFixed(2)),
       })),
       shippingMethod: "STANDARD",
       paymentMethod: [
