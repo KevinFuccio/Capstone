@@ -43,7 +43,6 @@ export const userReducer = (
       };
       case USER_MODIFY:
         const {username:user_name,email:user_email} = action.payload as userModify
-        console.log(user_email,user_name);
         
         return{
           ...state,

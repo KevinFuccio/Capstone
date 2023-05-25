@@ -23,7 +23,6 @@ const dispatch = useDispatch();
   };
   const handleSubmit=async (user:userModify,token:string,id:number)=>{
     let data = await modifyUser(user,token,id);
-    console.log(data);
     
     dispatch({
       type:USER_MODIFY,
