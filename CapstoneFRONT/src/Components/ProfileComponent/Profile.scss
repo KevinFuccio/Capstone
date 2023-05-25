@@ -1,6 +1,6 @@
 .wrap{
   background-color: rgb(232, 232, 232);
-  height: 100vh;
+  min-height: 100vh;
 }
 .profile-wrapper {
  
@@ -21,4 +21,19 @@ align-items: center;
         text-align: start;
     }
   }
+}
+.profile-btn{
+  background-color: #ff8400;
+  border: 1px solid white;
+  color: white;
+  width: 60px;
+  height: 34px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 5px;
+  margin-left: 15px;
+  cursor: pointer;
 }

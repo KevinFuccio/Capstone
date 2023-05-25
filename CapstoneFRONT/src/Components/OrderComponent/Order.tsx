@@ -8,7 +8,12 @@ import "./Order.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
 import ButtonWrapper from "../PayPalComponent/ButtonWrappere";
-import { CART_MODIFY, CART_REMOVE, TOT_CART, foodTypeConverter } from "../../Redux/ActionTypes";
+import {
+  CART_MODIFY,
+  CART_REMOVE,
+  TOT_CART,
+  foodTypeConverter,
+} from "../../Redux/ActionTypes";
 import { Products } from "../../Redux/Interface";
 const Order = () => {
   const [clientToken, setClientToken] = useState(null);
@@ -19,36 +24,36 @@ const Order = () => {
   const clientId =
     "AXwy2HanA2CEPUmlWjOou2Fq91j3YFWcpFc0WeE1lqJVfwfAvPwWe_5f4wYYLryxywu_-Pfrlhw0jAxy";
 
-    const cartSumAmount = () => {
-      let singlePrice = 0;
-  
-      if (loggedUser.user.cart.productsItems.length > 0) {
-        singlePrice = loggedUser.user?.cart.productsItems.reduce(
-          (acc, product) => {
-            let n = foodTypeConverter(product)
-  
-          return acc + (product.price * n) * product.cartQuantity;
-          },
-          0
-        );
-      } else {
-        return 0;
-      }
-  
-      return Number(singlePrice).toFixed(2);
-    };
-    const cartSumQuantity = () => {
-      let totalQty = 0;
-  
-      if (loggedUser.user.cart.productsItems.length > 0) {
-        totalQty = loggedUser.user?.cart.productsItems.reduce((acc, product) => {
-          return acc + product.cartQuantity
-        }, 0);
-      } else {
-        return totalQty;
-      }
+  const cartSumAmount = () => {
+    let singlePrice = 0;
+
+    if (loggedUser.user.cart.productsItems.length > 0) {
+      singlePrice = loggedUser.user?.cart.productsItems.reduce(
+        (acc, product) => {
+          let n = foodTypeConverter(product);
+
+          return acc + product.price * n * product.cartQuantity;
+        },
+        0
+      );
+    } else {
+      return 0;
+    }
+
+    return Number(singlePrice).toFixed(2);
+  };
+  const cartSumQuantity = () => {
+    let totalQty = 0;
+
+    if (loggedUser.user.cart.productsItems.length > 0) {
+      totalQty = loggedUser.user?.cart.productsItems.reduce((acc, product) => {
+        return acc + product.cartQuantity;
+      }, 0);
+    } else {
       return totalQty;
-    };
+    }
+    return totalQty;
+  };
 
   const cartAdd = (
     product: Products,
@@ -74,7 +79,6 @@ const Order = () => {
     ));
   };
 
-  
   useEffect(() => {
     dispatch({
       type: TOT_CART,
@@ -97,7 +101,13 @@ const Order = () => {
                 <div key={i} className="order-product">
                   <p>{el.name}</p>
                   <img src={el.image} alt="" />
-                  <p>{el.price}€/kg</p>
+                  <p>
+                    Pacco:{" "}
+                    {el.productCategory.name === "FOOD"
+                      ? foodTypeConverter(el) + "/kg"
+                      : "x" + foodTypeConverter(el)}{" "}
+                  </p>
+                  <p>Prezzo: {((el.price * foodTypeConverter(el)) * el.cartQuantity).toFixed(2)}€</p>
                   <select
                     value={el.cartQuantity}
                     name="options"
@@ -106,9 +116,9 @@ const Order = () => {
                   >
                     {optionQuantity(el)}
                   </select>
-                  <p>quantity:{el.cartQuantity}/kg</p>
+                  <p>quantity:{el.cartQuantity}</p>
                   <div className="checkout-btn">
-                  <button onClick={() => cartRemove(el)}>Rimuovi</button>
+                    <button onClick={() => cartRemove(el)}>Rimuovi</button>
                   </div>
                 </div>
               ))}

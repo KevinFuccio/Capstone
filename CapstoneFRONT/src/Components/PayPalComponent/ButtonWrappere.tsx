@@ -6,6 +6,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import axio from "../../api/axio";
 import { PaypalInterface } from "../../Redux/Interface";
 import { CART_CLEAR, foodTypeConverter } from "../../Redux/ActionTypes";
+import { Exception } from "sass";
+import { hasUncaughtExceptionCaptureCallback } from "process";
 
 const ButtonWrapper = ({
   currency,
@@ -88,7 +90,7 @@ const ButtonWrapper = ({
         },
       });
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -147,9 +149,9 @@ const ButtonWrapper = ({
         onApprove={async (data, actions) => {
           const order: any = await actions.order?.capture();
           const orderPost = shoppingOrder(order);
-          console.log(order, "order");
+          
           setTimeout(() => {
-            navigate(`/thankYou/${user.username}`);
+            navigate(`/thankYou/`);
             personalDispatch({
               type: CART_CLEAR,
             });

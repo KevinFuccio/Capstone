@@ -1,0 +1,18 @@
+.profile-btn-modal{
+    background-color: #ff8400;
+    border: 1px solid white;
+    color: white;
+    height: 34px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+    &:hover{
+        background-color: #ff8400;
+        border: 1px solid white;
+    }
+}

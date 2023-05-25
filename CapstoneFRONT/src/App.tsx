@@ -81,7 +81,7 @@ function App() {
           <Route path='/login'element={<Login/>}/>
           <Route path='/cart'element={<Cart/>}/>
           <Route path='/order' element={<Order/>}/>
-          <Route path='/thankYou/:name' element={<ThankYou/>}/>
+          <Route path='/thankYou/' element={<ThankYou/>}/>
           <Route path='/products/:id' element={<SingleProduct/>}/>
           <Route path='/products/category/:category' element={<Product/>}/>
           <Route path='/result/:search' element={<SearchResult/>}/>

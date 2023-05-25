@@ -25,20 +25,19 @@ const Profile = () => {
       <Navbar />
       <div className="profile-wrapper">
         <div className="profile mo5">
+          <div>
+          
+          </div>
           <div className="mo5 profile-info">
             <div>
               <h4>Nome:</h4>
               <p>{user.username}</p>
             </div>
-              <ProfileModal/>
           </div>
           <div className="mo5 profile-info">
             <div>
               <h4>Email:</h4>
               <p>{user.email}</p>
-            </div>
-            <div>
-              <button>Modifica</button>
             </div>
           </div>
           <div className="mo5 profile-info">
@@ -46,11 +45,9 @@ const Profile = () => {
               <h4>Password:</h4>
               <p>******</p>
             </div>
-            <div>
-              <button>Modifica</button>
-            </div>
           </div>
-          <button>Fatto</button>
+          <ProfileModal />
+          <button className="profile-btn" onClick={()=> navigate("/")}>Fatto</button>
         </div>
       </div>
     </div>

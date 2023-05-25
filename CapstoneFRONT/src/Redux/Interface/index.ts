@@ -243,7 +243,10 @@ export interface User {
   roles:    Role[];
   address:  Address[];
 }
-
+export interface userModify{
+  username:string,
+  email:string
+}
 export interface Role {
   id:       number;
   roleName: string;

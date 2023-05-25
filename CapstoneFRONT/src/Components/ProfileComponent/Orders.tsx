@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navbar from "../NavComponent/Navbar";
 import "./Orders.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
-import { ORDER, foodTypeConverter, getOrders } from "../../Redux/ActionTypes";
-import { OrderLine, ShoppingOrderList } from "../../Redux/Interface";
+import { ORDER, getOrders } from "../../Redux/ActionTypes";
+import { OrderLine } from "../../Redux/Interface";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const Orders = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -66,30 +67,37 @@ const Orders = () => {
           <div className="order-title">
             <h3>I tuoi ordini:</h3>
           </div>
-          <div>
+          <div className="product-order-wrapper">
             {order.map((e, i) => (
-              <>
-                <div>
-                  <p>Ordine id: {e.id}</p>
-                  {e.orderLine.map((j, index) => (
-                    <div>
-                      <div>
-                        <p>
-                          del: {moment(e.initializedOrder).format("DD-MM-YYYY")}
-                        </p>
-                      </div>
-                      <div>
-                        <p>{j.product.name}</p>
-                        <img src={j.product.image} alt="" />
-                        <p>prezzo:{j.price}</p>
-                        <p>Quantità prodotto{j.quantity}</p>
-                        <p>Pacco:{j.product.productCategory.name==="FOOD"?itemConverter(j)+"/kg":"x"+itemConverter(j)}</p>
-                      </div>
-                    </div>
-                  ))}
-                  <p>Totale ordine:{e.totalPrice}</p>
+              <div key={i} className="pow">
+                <div className="pow-p">
+                  <p>Ordine # {e.id}</p>
+                  <p>Totale ordine: {e.totalPrice}€</p>
+                  <p>
+                    Ordinato il:{" "}
+                    {moment(e.initializedOrder).format("DD-MM-YYYY")}
+                  </p>
                 </div>
-              </>
+                {e.orderLine.map((j, index) => (
+                  <div key={index} className="product-order">
+                    <div style={{ height:"100px" }}>
+                      <img src={j.product.image} alt="" />
+                      <div className="qty"><p >{j.quantity}</p></div>
+                      
+                    </div>
+                    <div className="product-order-info">
+                      <Link to={`/products/${j.product.id}`}>{j.product.name}</Link>
+                      <p>prezzo:{j.price}</p>
+                      <p>
+                        Pacco:
+                        {j.product.productCategory.name === "FOOD"
+                          ? itemConverter(j) + "/kg"
+                          : "x" + itemConverter(j)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             ))}
           </div>
         </div>

@@ -6,12 +6,11 @@ import { CART_CLEAR } from "../../Redux/ActionTypes";
 const ThankYou = ()=>{
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {name} = useParams();
-    console.log(name);
+ 
     
     return(
         <div>
-            <h2>Thank you for the purchase! {name}</h2>
+            <h2>Thank you for the purchase!</h2>
             <button onClick={()=>{
                 navigate("/")
                 dispatch({

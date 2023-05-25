@@ -7,6 +7,7 @@ import {
   CART_REMOVE,
   TOT_CART,
   USER,
+  USER_MODIFY,
 } from "../ActionTypes";
 import {
   MyState,
@@ -15,6 +16,7 @@ import {
   ModifyCartPayload,
   CartActionPayload,
   AddPayload,
+  userModify,
 } from "../Interface";
 
 const initialState: MyState = {
@@ -31,6 +33,7 @@ export const userReducer = (
     | ModifyCartPayload
     | CartActionPayload
     | AddPayload
+    |userModify
   >
 ) => {
   switch (action.type) {
@@ -38,6 +41,18 @@ export const userReducer = (
       return {
         user: action.payload as Registration,
       };
+      case USER_MODIFY:
+        const {username:user_name,email:user_email} = action.payload as userModify
+        console.log(user_email,user_name);
+        
+        return{
+          ...state,
+          user:{
+            ...state.user,
+            username:user_name,
+            email:user_email
+          }
+        }
     case CART_ADD:
       const payload = action.payload as AddPayload;
       const { object1, qty } = payload;

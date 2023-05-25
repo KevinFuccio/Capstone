@@ -13,3 +13,49 @@
     }
   }
 }
+.product-order-wrapper {
+  margin: 20px;
+  .pow {
+    text-align: start;
+    .pow-p {
+      display: flex;
+      justify-content: space-around;
+    }
+    .qty {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      position: relative;
+      top: -32px;
+      left: 68px;
+      background-color: #efefef;
+      border: 1px solid gray;
+      width: 20px;
+      height: 20px;
+      border-radius: 24px;
+      p{
+        margin: 0;
+        font-size: small;
+      }
+    }
+    .product-order {
+      display: flex;
+      img {
+        height: 100px;
+        width: 92px;
+      }
+      .product-order-info {
+        a {
+          color: #0088ff;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        p {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}

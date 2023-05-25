@@ -1,7 +1,8 @@
-import { OrderLine, Products, Registration, comment, commmentPost } from "../Interface";
+import { OrderLine, Products, Registration, comment, commmentPost, userModify } from "../Interface";
 import axio from "../../api/axio";
 
 export const PRODUCT_FETCH_ALL = "api/products/category/";
+export const MODIFY_USER="api/user/"
 export const GET_ORDERS = "api/orders/";
 export const PRODUCT_FETCH_BY_NAME = "api/products/name/";
 export const PRODUCT_FETCH_BY_ID = "api/products/";
@@ -17,6 +18,7 @@ export const CART_CLEAR = "CART_CLEAR";
 export const CART_ADD_FIX ="CART_ADD_FIX"
 export const CART_MODIFY_VARIANT = "CART_MODIFY_VARIANT";
 export const ORDER = "ORDER";
+export const USER_MODIFY ="USER_MODIFY";
 
 
 let url = "http://localhost:8080/api/auth/register";
@@ -109,6 +111,16 @@ export const getProductById = async (id: string) => {
 export const postComment = async(obj:commmentPost,user:Registration)=>{
   try {
     const response = await axio.post(COMMENT_POST,JSON.stringify(obj),{headers:{"Content-Type":"application/json",Authorization: `Bearer ${user.accessToken}`}})
+  } catch (error) {
+    console.log(error);
+    
+    
+  }
+}
+export const modifyUser = async(user:userModify,token:string,id:number)=>{
+  try {
+    const response = await axio.post(MODIFY_USER+id,JSON.stringify(user),{headers:{"Content-Type":"application/json",Authorization: `Bearer ${token}`}})
+  return response.data;
   } catch (error) {
     console.log(error);
     
