@@ -68,6 +68,7 @@ const ButtonWrapper = ({
         },
         quantity: el.cartQuantity,
         price: Number(((el.price *foodTypeConverter(el))*el.cartQuantity).toFixed(2)),
+        productVariantProduct:el.productVariant.variant
       })),
       shippingMethod: "STANDARD",
       paymentMethod: [

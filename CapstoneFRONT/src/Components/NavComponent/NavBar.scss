@@ -1,121 +1,120 @@
-.navbar-form-wrapper{
+
+.navbar-form-wrapper {
     width: 50%;
-    form{
+    form {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
-    .search{
-        border-radius: 5px;
-        height: 24px;
-        width: 60%;
-        margin: 5px 0px;
-        border: 1px solid;
-        &:focus{
-             outline: none;
-           }
+
+  .search {
+    border-radius: 5px;
+    height: 28px;
+    width: 60%;
+    margin: 5px 0px;
+    border: 1px solid;
+    &:focus {
+      outline: none;
     }
-    
-    .searchBtn{
-        height: 28px;
-        width: 30px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        border: 1px solid;
-        position: relative;
-        right: 15px;
-        background-color: #ffbb00;
-        cursor: pointer;
-       
-    }
+  }
+
+  .searchBtn {
+    height: 28px;
+    width: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid;
+    position: relative;
+    right: 15px;
+    background-color: #ffbb00;
+    cursor: pointer;
+  }
 }
-.navbar_main{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #ff8400;
-        height: 50px;
-        padding: 0px 20px;
-        margin: auto;
+.navbar_main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff8400;
+  height: 50px;
+  padding: 0px 20px;
+  margin: auto;
 }
-.links{
-    a{
-        text-decoration: none;
-        font-size: large;
-        font-weight: 600;
-        color: white;
-    }
-     a:last-child{
-            margin-left: 20px;
-    }
+.links {
+  a {
+    text-decoration: none;
+    font-size: large;
+    font-weight: 600;
+    color: white;
+  }
+  a:last-child {
+    margin-left: 20px;
+  }
 }
-.login{
-    button{
-        background-color: #ff8400;
-        border: none;
-        color: white;
-        width: 80px;
-        height: 34px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 5px;
-        cursor: pointer;
-        
+.login {
+  button {
+    background-color: #ff8400;
+    border: none;
+    color: white;
+    width: 80px;
+    height: 34px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  a:last-child {
+    margin-left: 20px;
+    button {
+      background-color: #ffffff;
+      color: #ff8400;
+      border: 2px solid #ff8400;
     }
-    
-    
-    a:last-child{
-       margin-left: 20px;
-       button{
-        background-color: #ffffff;
-        color: #ff8400;
-        border: 2px solid #ff8400;
-       }
-    }
-    
+  }
 }
-.loginDiv{
-    display: flex;
-    align-items: center;
-    button{
-        background-color: #ff8400;
-        border: 1px solid white;
-        color: white;
-        width: 60px;
-        height: 34px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 5px;
-        margin-left: 15px;
-        cursor: pointer;
-        
+.loginDiv {
+  display: flex;
+  align-items: center;
+  a{
+    color: black;
+  }
+  button {
+    background-color: #ff8400;
+    border: 1px solid white;
+    color: white;
+    width: 60px;
+    height: 34px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+  }
+  .shoppingCart {
+    background-color: #ff8400;
+    border: none;
+    color: white;
+    width: 20px;
+    height: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-right: 36px;
+    cursor: pointer;
+    span {
+      position: relative;
+      bottom: 24px;
+      left: 15px;
     }
-    .shoppingCart{
-        background-color: #ff8400;
-        border: none;
-        color: white;
-        width: 20px;
-        height: 16px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 5px;
-        margin-right: 36px;
-        cursor: pointer;
-        span{
-            position: relative;
-            bottom: 18px;
-            left: 15px;
-        }
-    }
+  }
 }

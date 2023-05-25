@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.capstone.entity.ShoppingOrder;
 
-public interface ShoppingOrderRepository extends JpaRepository<ShoppingOrder,Long>{
-	List<ShoppingOrder> findByUserId(Long userId);
+public interface ShoppingOrderRepository extends JpaRepository<ShoppingOrder, Long> {
+    List<ShoppingOrder> findDistinctByUserId(Long userId);
 }
+

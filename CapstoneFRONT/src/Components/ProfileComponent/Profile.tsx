@@ -1,12 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../NavComponent/Navbar";
 import "./Profile.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
 import ProfileModal from "./ProfileModal";
 
 const Profile = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
   const { username } = useParams();
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.user);
@@ -25,9 +30,7 @@ const Profile = () => {
               <h4>Nome:</h4>
               <p>{user.username}</p>
             </div>
-            <div>
               <ProfileModal/>
-            </div>
           </div>
           <div className="mo5 profile-info">
             <div>

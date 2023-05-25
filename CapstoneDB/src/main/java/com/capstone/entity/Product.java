@@ -34,7 +34,7 @@ public class Product {
 	private Double price;
 	@ManyToOne
 	private ProductCategory productCategory;
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 	private Set<ProductVariant> productVariant = new HashSet<>();
 	@JsonIgnoreProperties(value = "product")
 	@OneToMany(mappedBy = "product")

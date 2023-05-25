@@ -1,5 +1,6 @@
 package com.capstone.payload;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.capstone.entity.Address;
@@ -12,7 +13,7 @@ import lombok.Data;
 @Data
 public class ShoppingOrderDto {
 	private Address address;
-	private List<OrderLine> orderLine;
+	private List<OrderLine> orderLine= new ArrayList<>();
 	private double totalPrice;
 	private Shipping_method shippingMethod;
 	private List<PaymentMethod> paymentMethod;

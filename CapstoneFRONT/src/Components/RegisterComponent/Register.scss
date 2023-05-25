@@ -54,10 +54,13 @@ section {
     };
     
     button {
-      width: 70px;
       height: 36px;
       margin: auto;
       margin-top: 10px;
+      border: none;
+      background-color: #ffffff;
+      border-radius: 5px;
+      color: black;
     }
   }
   .line {

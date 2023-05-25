@@ -21,4 +21,5 @@ public class OrderLine {
 	private ShoppingOrder shoppingOrder;
 	private int quantity;
 	private double price;
+	private String productVariantProduct;
 }

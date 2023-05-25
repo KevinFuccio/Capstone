@@ -35,7 +35,7 @@ public class ShoppingOrderController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getUserOrders(@PathVariable Long id){
 		
-		return new ResponseEntity<>(shoppingRepo.findByUserId(id),HttpStatus.OK);
+		return new ResponseEntity<>(shoppingRepo.findDistinctByUserId(id),HttpStatus.OK);
 	}
 	
 }

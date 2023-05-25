@@ -6,6 +6,9 @@ export interface MyState {
 export interface ProductsState {
   products: Products[];
 }
+export interface OrderState{
+  order: ShoppingOrderList[]
+}
 
 //OBJECT interfaces
 // export interface User {
@@ -15,6 +18,12 @@ export interface ProductsState {
 //   family_name: string;
 //   given_name: string;
 // }
+
+export interface OrderLine{
+  address:Address,
+  id:number,
+  price:number
+}
 
 export interface Roles {
   id: number;
@@ -54,21 +63,7 @@ export interface Products {
   quantityInStock: number;
   cartQuantity: number;
 }
-export interface comment {
-  id: number;
-  user: Registration;
-  comment: string;
-  published:Date;
-  valutation: number;
-}
-export interface Address {
-  id: number;
-  city: string;
-  streetName: string;
-  streetNumber: string;
-  postalCode: string;
-  region: string;
-}
+
 export interface ModifyCartPayload {
   obj: Products;
   optionValue: string;
@@ -199,4 +194,74 @@ export interface ShippingAddress {
 
 export interface ShippingName {
   full_name: string;
+}
+//ShoppingOrderHistory interface
+export interface ShoppingOrderList {
+  id:                number;
+  user:              User;
+  initializedOrder:  Date;
+  scheduledDelivery: Date;
+  address:           Address;
+  orderLine:         OrderLine[];
+  totalPrice:        number;
+  status:            ShippingMethod;
+  shippingMethod:    ShippingMethod;
+  paymentMethod:     PaymentMethod[];
+}
+
+export interface Address {
+  id:         number;
+  city:       string;
+  streetName: string;
+  postalCode: string;
+  region:     string;
+}
+
+export interface OrderLine {
+  id:             number;
+  product:        Products;
+  quantity:       number;
+  price:          number;
+  productVariantProduct: string;
+}
+
+
+export interface comment {
+  id:         number;
+  user:       User;
+  comment:    string;
+  published:  Date;
+  valutation: number;
+}
+
+export interface User {
+  id:       number;
+  name:     string;
+  username: string;
+  email:    string;
+  password: string;
+  roles:    Role[];
+  address:  Address[];
+}
+
+export interface Role {
+  id:       number;
+  roleName: string;
+}
+
+export interface ShippingMethod {
+  id:   number;
+  name: string;
+}
+
+export interface ProductVariant {
+  id:      number;
+  variant: string;
+}
+
+export interface PaymentMethod {
+  id:          number;
+  provider:    string;
+  create_time: Date;
+  status:      string;
 }

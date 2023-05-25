@@ -2,7 +2,9 @@ package com.capstone.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +61,11 @@ public class ShoppingOrderService {
 		Address address = addressService.createAndConnectAddress(addDto, u.getId());
 		s.setUser(u);
 		s.setInitializedOrder(LocalDate.now());
-		s.setOrderLine(ShoppingOrder.getOrderLine());
+		
+		Set<OrderLine> uniqueOrderLines = new HashSet<>(ShoppingOrder.getOrderLine());
+		List<OrderLine> orderLine = new ArrayList<>(uniqueOrderLines);
+		s.setOrderLine(orderLine);
+
 		s.getOrderLine().forEach(e -> e.setShoppingOrder(s));
 		s.setAddress(address);
 		s.setStatus(statusRepo.findByName(Status_Order.INITIALIZED).get());

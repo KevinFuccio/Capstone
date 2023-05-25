@@ -1,4 +1,4 @@
-import { Products, Registration, comment, commmentPost } from "../Interface";
+import { OrderLine, Products, Registration, comment, commmentPost } from "../Interface";
 import axio from "../../api/axio";
 
 export const PRODUCT_FETCH_ALL = "api/products/category/";
@@ -16,6 +16,7 @@ export const TOT_CART = "TOT_CART";
 export const CART_CLEAR = "CART_CLEAR";
 export const CART_ADD_FIX ="CART_ADD_FIX"
 export const CART_MODIFY_VARIANT = "CART_MODIFY_VARIANT";
+export const ORDER = "ORDER";
 
 
 let url = "http://localhost:8080/api/auth/register";
@@ -37,9 +38,25 @@ export const foodTypeConverter =(product:Products)=>{
         return n ;
       }
     }
+  }else{
+    switch (product.productVariant.variant) {
+      case "S":
+        n = 1;
+        break;
+      case "M":
+        n = 5;
+        break;
+      case "L":
+        n = 10;
+        break;
+      default: {
+        return n ;
+      }
+    }
   }
   return n;
 }
+
 
 // export const myfetch = async(params:User) =>{
 //     try {
