@@ -19,7 +19,7 @@ const SearchResult = () => {
     <>
       <Navbar />
       {items.length !== 0 ? (
-        <div className="MainPageBody mo5">
+        <div className="MainPageBody mo5" style={{marginTop:"20px"}}>
           {items?.map((el, i) => (
             <div className="product-card-wrapper" key={i}>
               <div className="product-card">

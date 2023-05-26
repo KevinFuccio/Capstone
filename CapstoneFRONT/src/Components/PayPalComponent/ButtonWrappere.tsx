@@ -23,9 +23,9 @@ const ButtonWrapper = ({
     if (loggedUser.user.cart.productsItems.length > 0) {
       singlePrice = loggedUser.user?.cart.productsItems.reduce(
         (acc, product) => {
-          let n = foodTypeConverter(product)
+          let n = foodTypeConverter(product);
 
-        return acc + (product.price * n) * product.cartQuantity;
+          return acc + product.price * n * product.cartQuantity;
         },
         0
       );
@@ -64,13 +64,15 @@ const ButtonWrapper = ({
           description: el.description,
           image: el.image,
           quantityInStock: el.quantityInStock,
-          price: Number((el.price *foodTypeConverter(el)).toFixed(2)),
+          price: Number((el.price * foodTypeConverter(el)).toFixed(2)),
           productCategory: el.productCategory,
-          productVariant:[el.productVariant]
+          productVariant: [el.productVariant],
         },
         quantity: el.cartQuantity,
-        price: Number(((el.price *foodTypeConverter(el))*el.cartQuantity).toFixed(2)),
-        productVariantProduct:el.productVariant.variant
+        price: Number(
+          (el.price * foodTypeConverter(el) * el.cartQuantity).toFixed(2)
+        ),
+        productVariantProduct: el.productVariant.variant,
       })),
       shippingMethod: "STANDARD",
       paymentMethod: [
@@ -90,7 +92,7 @@ const ButtonWrapper = ({
         },
       });
     } catch (error) {
-      
+      navigate("/");
     }
   };
 
@@ -108,7 +110,7 @@ const ButtonWrapper = ({
     <>
       {showSpinner && isPending && <div className="spinner" />}
       <PayPalButtons
-        style={{ layout: "vertical" }}
+        style={{ layout: "vertical",color:"black",label:"checkout" }}
         disabled={false}
         forceReRender={[shoppingTotal, currency, style]}
         fundingSource={undefined}
@@ -149,7 +151,7 @@ const ButtonWrapper = ({
         onApprove={async (data, actions) => {
           const order: any = await actions.order?.capture();
           const orderPost = shoppingOrder(order);
-          
+
           setTimeout(() => {
             navigate(`/thankYou/`);
             personalDispatch({

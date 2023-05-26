@@ -15,6 +15,8 @@ import {
   foodTypeConverter,
 } from "../../Redux/ActionTypes";
 import { Products } from "../../Redux/Interface";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 const Order = () => {
   const [clientToken, setClientToken] = useState(null);
   const loggedUser = useSelector((state: RootState) => state.user);
@@ -93,40 +95,56 @@ const Order = () => {
     <>
       <div>
         <h2>Riepilogo ordine:</h2>
+        <h4 style={{ textAlign: "start" }}>Prodotti:</h4>
         <header>
           <div className="checkout-wrp">
-            <h4>Prodotti:</h4>
             <div className="checkout">
               {loggedUser.user.cart.productsItems.map((el, i) => (
                 <div key={i} className="order-product">
-                  <p>{el.name}</p>
-                  <img src={el.image} alt="" />
-                  <p>
-                    Pacco:{" "}
-                    {el.productCategory.name === "FOOD"
-                      ? foodTypeConverter(el) + "/kg"
-                      : "x" + foodTypeConverter(el)}{" "}
-                  </p>
-                  <p>Prezzo: {((el.price * foodTypeConverter(el)) * el.cartQuantity).toFixed(2)}€</p>
-                  <select
-                    value={el.cartQuantity}
-                    name="options"
-                    id="1"
-                    onChange={(e) => cartAdd(el, e)}
-                  >
-                    {optionQuantity(el)}
-                  </select>
-                  <p>quantity:{el.cartQuantity}</p>
+                  <div>
+                    <img
+                      src={el.image}
+                      style={{ height: "100px", width: "92px" }}
+                      alt=""
+                    />
+                    <p className="qty">{el.cartQuantity}</p>
+                  </div>
+                  <div>
+                    <p>{el.name}</p>
+                    <p>
+                      Pacco:{" "}
+                      {el.productCategory.name === "FOOD"
+                        ? foodTypeConverter(el) + "/kg"
+                        : "x" + foodTypeConverter(el)}{" "}
+                    </p>
+                    <p>
+                      Prezzo:{" "}
+                      {(
+                        el.price *
+                        foodTypeConverter(el) *
+                        el.cartQuantity
+                      ).toFixed(2)}
+                      €
+                    </p>
+                    <select
+                      value={el.cartQuantity}
+                      name="options"
+                      id="1"
+                      onChange={(e) => cartAdd(el, e)}
+                    >
+                      {optionQuantity(el)}
+                    </select>
+                  </div>
                   <div className="checkout-btn">
-                    <button onClick={() => cartRemove(el)}>Rimuovi</button>
+                    <button onClick={() => cartRemove(el)}><FontAwesomeIcon icon={faTrash} color="darkred"></FontAwesomeIcon></button>
                   </div>
                 </div>
               ))}
-              <span>Tot carrello: {cartSumAmount()}€</span>
             </div>
           </div>
-          <div>
-            <span>paga con:</span>
+          <div className="paypal-box">
+              <span>Tot carrello: {cartSumAmount()}€</span>
+            <span style={{marginBottom:"10px"}}>paga con:</span>
             <PayPalScriptProvider options={{ "client-id": clientId }}>
               <ButtonWrapper currency={currency} showSpinner={false} />
             </PayPalScriptProvider>

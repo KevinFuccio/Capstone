@@ -11,7 +11,7 @@ const ThankYou = ()=>{
     return(
         <div>
             <h2>Thank you for the purchase!</h2>
-            <button onClick={()=>{
+            <button className="thank-you-btn" onClick={()=>{
                 navigate("/")
                 dispatch({
                     type:CART_CLEAR

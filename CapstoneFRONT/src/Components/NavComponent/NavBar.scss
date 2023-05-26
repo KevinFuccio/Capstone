@@ -1,6 +1,7 @@
 
 .navbar-form-wrapper {
-    width: 50%;
+    width: 600px;
+    margin-left: 30px;
     form {
         width: 100%;
         display: flex;
@@ -11,7 +12,7 @@
   .search {
     border-radius: 5px;
     height: 28px;
-    width: 60%;
+    width: 100%;
     margin: 5px 0px;
     border: 1px solid;
     &:focus {
@@ -110,6 +111,7 @@
     font-weight: 600;
     border-radius: 5px;
     margin-right: 36px;
+    margin-left: 0px;
     cursor: pointer;
     span {
       position: relative;

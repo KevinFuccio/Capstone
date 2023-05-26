@@ -83,14 +83,12 @@ const Orders = () => {
                     <div style={{ height:"100px" }}>
                       <img src={j.product.image} alt="" />
                       <div className="qty"><p >{j.quantity}</p></div>
-                      
                     </div>
                     <div className="product-order-info">
                       <Link to={`/products/${j.product.id}`}>{j.product.name}</Link>
-                      <p>prezzo:{j.price}</p>
+                      <p>prezzo: {j.price}€</p>
                       <p>
-                        Pacco:
-                        {j.product.productCategory.name === "FOOD"
+                        Pacco:{j.product.productCategory.name === "FOOD"
                           ? itemConverter(j) + "/kg"
                           : "x" + itemConverter(j)}
                       </p>
