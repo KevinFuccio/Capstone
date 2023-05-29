@@ -16,6 +16,7 @@ import { RootState } from "../../Redux/Store";
 import RatingStar from "../RatingComponent/RatingStar";
 import { Rating } from "react-simple-star-rating";
 import moment from "moment";
+import Footer from "../FooterComponent/Footer";
 
 const SingleProduct = () => {
   const loggedUser = useSelector((state: RootState) => state.user);
@@ -286,6 +287,7 @@ const SingleProduct = () => {
       ) : (
         <div></div>
       )}
+      <Footer/>
     </div>
   );
 };

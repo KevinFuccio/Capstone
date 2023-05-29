@@ -5,6 +5,7 @@ import Navbar from "../NavComponent/Navbar";
 import { Products } from "../../Redux/Interface";
 import "./SearchResult.scss";
 import { Rating } from "react-simple-star-rating";
+import Footer from "../FooterComponent/Footer";
 
 const SearchResult = () => {
   const { search } = useParams();
@@ -16,7 +17,8 @@ const SearchResult = () => {
     })();
   }, [search]);
   return (
-    <>
+    <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
+      <div>
       <Navbar />
       {items.length !== 0 ? (
         <div className="MainPageBody mo5" style={{marginTop:"20px"}}>
@@ -43,7 +45,9 @@ const SearchResult = () => {
           <p>Non ci sono risultati per {search}</p>
         </div>
       )}
-    </>
+      </div>
+      <Footer/>
+    </div>
   );
 };
 export default SearchResult;

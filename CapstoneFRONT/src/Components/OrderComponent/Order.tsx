@@ -17,6 +17,8 @@ import {
 import { Products } from "../../Redux/Interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Footer from "../FooterComponent/Footer";
+import Navbar from "../NavComponent/Navbar";
 const Order = () => {
   const [clientToken, setClientToken] = useState(null);
   const loggedUser = useSelector((state: RootState) => state.user);
@@ -92,8 +94,9 @@ const Order = () => {
   }, [cartSumAmount()]);
 
   return (
-    <>
+    <div style={{height:"100vh",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
       <div>
+        <Navbar/>
         <h2>Riepilogo ordine:</h2>
         <h4 style={{ textAlign: "start" }}>Prodotti:</h4>
         <header>
@@ -151,7 +154,8 @@ const Order = () => {
           </div>
         </header>
       </div>
-    </>
+      <Footer/>
+    </div>
   );
 };
 export default Order;

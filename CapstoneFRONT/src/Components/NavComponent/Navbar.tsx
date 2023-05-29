@@ -5,10 +5,13 @@ import { RootState } from "../../Redux/Store";
 import { USER, getProductByName } from "../../Redux/ActionTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowLeft,
+  faClose,
   faMagnifyingGlass,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { NavDropdown } from "react-bootstrap";
 
 const Navbar = () => {
   const loggedUser = useSelector((state: RootState) => state.user);
@@ -17,6 +20,7 @@ const Navbar = () => {
   //const totalProducts = [...loggedUser.user.cart.productsItems]
   //console.log(totalProducts);
   const [search, setSearch] = useState("");
+  const [formResponsive, setFormResposive] = useState(false);
 
   const cartSum = () => {
     let totalQty = 0;
@@ -49,42 +53,114 @@ const Navbar = () => {
 
   return (
     <div className="">
-      <div className="navbar_main">
-        <div className="links">
-          <Link to={"/"}>Home</Link>
-        </div>
-        <div className="navbar-form-wrapper">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="searchBar"></label>
-            <input
-              type="text"
-              id="searchBar"
-              className="search"
-              value={search}
-              onChange={(e) => setSearch(e.currentTarget.value)}
-            />
-            <button className="searchBtn">
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </button>
-          </form>
-        </div>
+      <div
+        className="navbar_main"
+        style={formResponsive ? { justifyContent: "center" } : {}}
+      >
+        {!formResponsive ? (
+          <>
+            <div className="links">
+              <Link to={"/"}>Home</Link>
+            </div>
+            <div className="navbar-form-wrapper">
+              <form onSubmit={handleSubmit}>
+                <label htmlFor="searchBar"></label>
+                <input
+                  type="text"
+                  id="searchBar"
+                  className="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.currentTarget.value)}
+                />
+                <button className="searchBtn">
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+              </form>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+
         {!loggedUser.user.username ? (
           <div className="login">
-            <Link to={"/register"}>
-              <button>Registrati</button>
-            </Link>
             <Link to={"/login"}>
-              <button>Login</button>
+              <button>Accedi</button>
             </Link>
           </div>
         ) : (
           <div className="loginDiv">
-            <button className="shoppingCart" onClick={() => navigate("/cart")}>
-              <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
-              <span>{cartSum()}</span>
-            </button>
-            <Link to={`/profile-Info/`}>{loggedUser.user.username}</Link>
-            <button onClick={handleLogout}>Logout</button>
+            <div className="search-bar">
+              <form onSubmit={handleSubmit}>
+                {formResponsive ? (
+                  <>
+                    <span
+                      style={{ marginRight: "5px",cursor:"pointer" }}
+                      onClick={() => {
+                        setFormResposive(false);
+                        setSearch("");
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faArrowLeft} />
+                    </span>
+                    <label htmlFor="searchBar"></label>
+                    <input
+                      type="text"
+                      id="searchBar"
+                      className="search"
+                      value={search}
+                      onChange={(e) => setSearch(e.currentTarget.value)}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
+
+                <span
+                  className="responsive-form-close"
+                  style={
+                    !formResponsive
+                      ? { display: "none" }
+                      : { display: "inline-block" }
+                  }
+                  onClick={() => setSearch("")}
+                >
+                  x
+                </span>
+
+                <button
+                  className="searchBtn responsive-form-close"
+                  style={formResponsive ? { display: "inline" } : {}}
+                  onClick={() => setFormResposive(true)}
+                >
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+              </form>
+            </div>
+            {!formResponsive ? (
+              <>
+                <button
+                  className="shoppingCart"
+                  onClick={() => navigate("/cart")}
+                >
+                  <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
+                  <span>{cartSum()}</span>
+                </button>
+                <NavDropdown
+                  title={loggedUser.user.username}
+                  id="basic-nav-dropdown"
+                >
+                  <NavDropdown.Item href="#action/3.1">
+                    <Link to={`/profile-Info/`}>Il tuo account</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">
+                    <p onClick={handleLogout}>Logout</p>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         )}
       </div>

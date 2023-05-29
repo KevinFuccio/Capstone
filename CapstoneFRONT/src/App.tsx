@@ -18,6 +18,7 @@ import SearchResult from './Components/SearchResultComponent/SearchResult';
 import Profile from './Components/ProfileComponent/Profile';
 import Orders from './Components/ProfileComponent/Orders';
 import Info from './Components/ProfileComponent/Info';
+import Footer from "./Components/FooterComponent/Footer";
 // declare const google: any;
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
           <Route path='/profile-Info/orders' element={<Orders/>}/>
         </Routes>
       </BrowserRouter>
+      
     </div>
   );
 }

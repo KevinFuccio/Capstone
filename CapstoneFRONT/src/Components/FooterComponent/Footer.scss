@@ -1,0 +1,55 @@
+.footer {
+  margin-top: 30px;
+  overflow-x: hidden;
+  background: #000;
+  padding: 30px 0px;
+  font-family: "Play", sans-serif;
+  text-align: center;
+}
+
+.footer .rowl {
+  width: 100%;
+  margin: 1% 0%;
+  padding: 0.6% 0%;
+  color: gray;
+  font-size: 0.8em;
+}
+
+.footer .rowl a {
+  text-decoration: none;
+  color: gray;
+  transition: 0.5s;
+}
+
+.footer .rowl a:hover {
+  color: #fff;
+}
+
+.footer .rowl ul {
+  width: 100%;
+}
+
+.footer .rowl ul li {
+  display: inline-block;
+  margin: 0px 30px;
+}
+
+.footer .rowl a i {
+  font-size: 2em;
+  margin: 0% 1%;
+}
+
+@media (max-width: 720px) {
+  .footer {
+    text-align: left;
+    padding: 5%;
+  }
+  .footer .rowl ul li {
+    display: block;
+    margin: 10px 0px;
+    text-align: left;
+  }
+  .footer .rowl a i {
+    margin: 0% 3%;
+  }
+}

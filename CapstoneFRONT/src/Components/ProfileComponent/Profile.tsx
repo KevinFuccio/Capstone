@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/Store";
 import ProfileModal from "./ProfileModal";
+import Footer from "../FooterComponent/Footer";
 
 const Profile = () => {
   const [show, setShow] = useState(false);
@@ -21,7 +22,9 @@ const Profile = () => {
     }
   }, []);
   return (
-    <div className="wrap">
+    <div className="wrap" style={{minHeight:"100vh",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
+      <div>
+
       <Navbar />
       <div className="profile-wrapper">
         <div className="profile mo5">
@@ -40,16 +43,12 @@ const Profile = () => {
               <p>{user.email}</p>
             </div>
           </div>
-          <div className="mo5 profile-info">
-            <div>
-              <h4>Password:</h4>
-              <p>******</p>
-            </div>
-          </div>
           <ProfileModal />
           <button className="profile-btn" onClick={()=> navigate("/")}>Fatto</button>
         </div>
       </div>
+      </div>
+      <Footer/>
     </div>
   );
 };

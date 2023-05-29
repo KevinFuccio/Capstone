@@ -6,6 +6,7 @@ import "../MainPageComponent/MainPage.scss"
 import MainPageBody from "./MainPageBodyComponent/MainPageBody";
 import { useEffect } from "react";
 import { PRODUCTS, fetchProductsAll } from "../../Redux/ActionTypes";
+import Footer from "../FooterComponent/Footer";
 
     
 
@@ -32,6 +33,7 @@ const MainPage = ()=>{
             <MainPageBody typeProduct={"CONSERVE"}/>
             <MainPageBody typeProduct={"PLANT"}/>
         </div>
+        <Footer/>
         </>
     )
 };
