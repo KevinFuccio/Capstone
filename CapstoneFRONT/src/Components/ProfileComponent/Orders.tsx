@@ -64,7 +64,7 @@ const Orders = () => {
     <div className="wrap" style={{minHeight:"100vh",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
       <div>
         <Navbar />
-        <div className="order-wrapper">
+        <div className="orders-wrapper">
           <div className="order">
             <div className="order-title">
               <h3>I tuoi ordini:</h3>

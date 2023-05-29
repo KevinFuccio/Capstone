@@ -94,12 +94,12 @@ const Order = () => {
   }, [cartSumAmount()]);
 
   return (
-    <div style={{height:"100vh",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
+    <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
       <div>
         <Navbar/>
         <h2>Riepilogo ordine:</h2>
         <h4 style={{ textAlign: "start" }}>Prodotti:</h4>
-        <header>
+        <header className="order-wrapper">
           <div className="checkout-wrp">
             <div className="checkout">
               {loggedUser.user.cart.productsItems.map((el, i) => (
