@@ -126,12 +126,16 @@
     align-items: center;
     .pdw-box{
       flex-direction: column;
+      .product-price{
+        display: none;
+      }
     }
     .wrp-add-cart{
       width: 290px;
       margin-top: 20px;
       margin-left: 0px;
       margin-bottom: 20px;
+      
     }
     
   }
