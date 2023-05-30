@@ -10,3 +10,8 @@
   -o-box-shadow: 0px 0px 20px -2px #000000;
   box-shadow: 0px 0px 20px -2px #000000;
 }
+@media screen and (max-width: 470px) {
+  .boxLogin{
+    width: 200px;
+  }
+}

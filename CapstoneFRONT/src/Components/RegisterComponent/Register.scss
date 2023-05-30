@@ -114,3 +114,19 @@ section {
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 }
+
+@media screen and (max-width: 470px) {
+  .box{
+    width: 200px;
+    height: 420px;
+    
+  }
+  section{
+    form{
+      input{
+        width: 100%;
+      }
+    }
+  }
+  
+}

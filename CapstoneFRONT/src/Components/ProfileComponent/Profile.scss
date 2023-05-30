@@ -36,3 +36,22 @@ align-items: center;
   margin-left: 15px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 571px) {
+  .profile-wrapper{
+    .profile{
+      width: 300px;
+      margin: 50px 0px;
+    }
+  }
+  
+}
+@media screen and (max-width: 320px) {
+  .profile-wrapper{
+    .profile{
+      width: 210px;
+      margin: 50px 0px;
+    }
+  }
+  
+}

@@ -137,7 +137,7 @@ const SingleProduct = () => {
   }, [id]);
 
   useEffect(() => {
-    if (product.id !== undefined) {
+    if (product.id) {
       setComment({
         ...comment,
         product_id: product?.id,
@@ -156,7 +156,7 @@ const SingleProduct = () => {
         <>
           <Navbar />
           <div style={{ display: "flex" }} className="mo5">
-            <div style={{ display: "flex", alignItems: "start" }} >
+            <div style={{ display: "flex", alignItems: "start" }}>
               <h2 className="product-name">{product.name}</h2>
               <p style={{ paddingLeft: "10px" }}>
                 <Rating
@@ -203,29 +203,34 @@ const SingleProduct = () => {
                 <h5 style={{ color: "red" }}>Scorte esaurite</h5>
               )}
               <div className="divSelect">
-                Pacco:
-                <select
-                  value={selectEvent}
-                  name="options"
-                  id="1"
-                  onChange={(e) => {
-                    setSelectEvent(e.currentTarget.value);
-                  }}
-                >
-                  {options}
-                </select>
-                quantità:
-                <select
-                  value={selectQuantity}
-                  name="options-quantity"
-                  id="2"
-                  onChange={(e) => {
-                    setSelectQuantity(e.currentTarget.value);
-                    console.log(e.currentTarget.value);
-                  }}
-                >
-                  {optionQuantity()}
-                </select>
+                <div>
+                  Pacco:
+                  <select
+                    value={selectEvent}
+                    name="options"
+                    id="1"
+                    onChange={(e) => {
+                      setSelectEvent(e.currentTarget.value);
+                    }}
+                  >
+                    {options}
+                  </select>
+                </div>
+                <div>
+                  quantità:
+                  <select
+                    value={selectQuantity}
+                    name="options-quantity"
+                    id="2"
+                    onChange={(e) => {
+                      setSelectQuantity(e.currentTarget.value);
+                      console.log(e.currentTarget.value);
+                    }}
+                  >
+                    {optionQuantity()}
+                  </select>
+                </div>
+              </div>
                 <div className="AddToCartBtn">
                   <button
                     onClick={() =>
@@ -236,12 +241,10 @@ const SingleProduct = () => {
                     Aggiungi al carrello
                   </button>
                 </div>
-              </div>
             </div>
           </div>
           <div className="comment-form-wrapper">
             <div className="comment-form">
-              
               <div>
                 <h4>Vuoi lasciare un commento su questo prodotto?</h4>
                 <form onSubmit={(e) => handleSubmit(e, comment)}>
@@ -287,7 +290,7 @@ const SingleProduct = () => {
       ) : (
         <div></div>
       )}
-      <Footer/>
+      <Footer />
     </div>
   );
 };

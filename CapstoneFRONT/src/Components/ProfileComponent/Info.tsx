@@ -29,7 +29,7 @@ const Info = () => {
               </button>
             </div>
             <div className="info-btn-wrapper">
-              <img src={userimg} alt="" style={{ marginRight: "15px" }} />
+              <img src={userimg} alt="" style={{ marginRight: "8px" }} />
               <button onClick={() => navigate(`/profile/${user.username}`)}>
                 Modifica il tuo profilo
               </button>

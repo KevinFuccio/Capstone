@@ -150,8 +150,8 @@ const Navbar = () => {
                   title={loggedUser.user.username}
                   id="basic-nav-dropdown"
                 >
-                  <NavDropdown.Item href="#action/3.1">
-                    <Link to={`/profile-Info/`}>Il tuo account</Link>
+                  <NavDropdown.Item>
+                    <p onClick={()=>navigate("/profile-info/")}>Il tuo account</p>
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">
                     <p onClick={handleLogout}>Logout</p>

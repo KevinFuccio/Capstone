@@ -9,7 +9,7 @@
   padding-top: 30px;
   min-height: 500px;
   .product-image {
-    max-width: 300px;
+    max-width: 230px;
     height: auto;
   }
   .pdw-box {
@@ -59,6 +59,9 @@
     .divSelect {
       text-align: start;
       padding-top: 10px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
     }
     .AddToCartBtn {
       text-align: center;
@@ -116,4 +119,38 @@
     flex-direction: column;
     align-items: flex-start;
   }
+}
+@media screen and (max-width: 635px) {
+  .product-wrapper{
+    flex-direction: column;
+    align-items: center;
+    .pdw-box{
+      flex-direction: column;
+    }
+    .wrp-add-cart{
+      width: 290px;
+      margin-top: 20px;
+      margin-left: 0px;
+      margin-bottom: 20px;
+    }
+    
+  }
+  
+}
+@media screen and (max-width:330px) {
+  .product-name{
+    font-size: 20px;
+  }
+  .product-wrapper{
+    .wrp-add-cart {
+      width: 200px;
+      margin: 20px;
+    }
+    .product-image {
+      max-width: 150px;
+      height: auto;
+      margin: auto;
+    }
+  
+  } 
 }
