@@ -84,9 +84,56 @@ const Navbar = () => {
 
         {!loggedUser.user.username ? (
           <div className="login">
-            <Link to={"/login"}>
-              <button>Accedi</button>
-            </Link>
+            <div className="search-bar">
+              <form onSubmit={handleSubmit}>
+                {formResponsive ? (
+                  <>
+                    <span
+                      style={{ marginRight: "5px", cursor: "pointer" }}
+                      onClick={() => {
+                        setFormResposive(false);
+                        setSearch("");
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faArrowLeft} />
+                    </span>
+                    <label htmlFor="searchBar"></label>
+                    <input
+                      type="text"
+                      id="searchBar"
+                      className="search"
+                      value={search}
+                      onChange={(e) => setSearch(e.currentTarget.value)}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
+
+                <span
+                  className="responsive-form-close"
+                  style={
+                    !formResponsive
+                      ? { display: "none" }
+                      : { display: "inline-block" }
+                  }
+                  onClick={() => setSearch("")}
+                >
+                  x
+                </span>
+
+                <button
+                  className="searchBtn responsive-form-close"
+                  style={formResponsive ? { display: "inline" } : {}}
+                  onClick={() => setFormResposive(true)}
+                >
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+              </form>
+              <Link to={"/login"}>
+                <button>Accedi</button>
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="loginDiv">
@@ -95,7 +142,7 @@ const Navbar = () => {
                 {formResponsive ? (
                   <>
                     <span
-                      style={{ marginRight: "5px",cursor:"pointer" }}
+                      style={{ marginRight: "5px", cursor: "pointer" }}
                       onClick={() => {
                         setFormResposive(false);
                         setSearch("");
@@ -151,7 +198,9 @@ const Navbar = () => {
                   id="basic-nav-dropdown"
                 >
                   <NavDropdown.Item>
-                    <p onClick={()=>navigate("/profile-info/")}>Il tuo account</p>
+                    <p onClick={() => navigate("/profile-info/")}>
+                      Il tuo account
+                    </p>
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">
                     <p onClick={handleLogout}>Logout</p>

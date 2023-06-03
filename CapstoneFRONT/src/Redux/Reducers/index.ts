@@ -33,7 +33,7 @@ export const userReducer = (
     | ModifyCartPayload
     | CartActionPayload
     | AddPayload
-    |userModify
+    | userModify
   >
 ) => {
   switch (action.type) {
@@ -41,21 +41,21 @@ export const userReducer = (
       return {
         user: action.payload as Registration,
       };
-      case USER_MODIFY:
-        const {username:user_name,email:user_email} = action.payload as userModify
-        
-        return{
-          ...state,
-          user:{
-            ...state.user,
-            username:user_name,
-            email:user_email
-          }
-        }
+    case USER_MODIFY:
+      const { username: user_name, email: user_email } =
+        action.payload as userModify;
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          username: user_name,
+          email: user_email,
+        },
+      };
     case CART_ADD:
       const payload = action.payload as AddPayload;
       const { object1, qty } = payload;
-      
 
       const itemIndex = state.user.cart.productsItems.findIndex(
         (item) =>

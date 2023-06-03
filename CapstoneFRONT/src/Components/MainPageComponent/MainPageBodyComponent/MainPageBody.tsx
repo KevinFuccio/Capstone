@@ -21,8 +21,8 @@ const MainPageBody = ({ typeProduct }: { typeProduct: string }) => {
   return (
     <div className="MainPageBody-wrapper">
       <div className="h3Box mo5">
-      <h3>sfoglia tutti</h3>
-      <Link to={`/products/category/${typeProduct}`}>vedi tutti{'>>'}</Link>
+      <h3>Sfoglia tutti</h3>
+      <Link to={`/products/category/${typeProduct}`}>Vedi tutti{'>>'}</Link>
       </div>
       <div className="MainPageBody mo5">
         {products?.slice(0, 4).map((el, i) => (

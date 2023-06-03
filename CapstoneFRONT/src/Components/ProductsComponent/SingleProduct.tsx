@@ -203,9 +203,10 @@ const SingleProduct = () => {
                 <h5 style={{ color: "red" }}>Scorte esaurite</h5>
               )}
               <div className="divSelect">
-                <div>
-                  Pacco:
+                <div style={{paddingRight:"10px"}}>
+                  Pacco
                   <select
+                  className="options-quantities"
                     value={selectEvent}
                     name="options"
                     id="1"
@@ -216,9 +217,9 @@ const SingleProduct = () => {
                     {options}
                   </select>
                 </div>
-                <div>
-                  quantità:
-                  <select
+                <div >
+                  Quantità
+                  <select className="options-quantities"
                     value={selectQuantity}
                     name="options-quantity"
                     id="2"
@@ -236,9 +237,9 @@ const SingleProduct = () => {
                     onClick={() =>
                       cartAdd(product, selectEvent, selectQuantity)
                     }
-                    disabled={!loggedUser.user.username ? true : false}
+                    disabled={!loggedUser.user.username || product.quantityInStock === 0 ? true : false}
                   >
-                    Aggiungi al carrello
+                    Aggiungi
                   </button>
                 </div>
             </div>
