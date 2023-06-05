@@ -153,6 +153,11 @@
   *{
     font-size: 13px;
   }
+  .login{
+    a:last-child {
+      margin-left: 10px;
+    }
+  }
   .navbar_main{
     padding: 0;
   }
@@ -170,11 +175,17 @@
   .search{
     border: none;
     outline: none;
-    border-radius: 15px;
     height: 28px;
     padding: 0 20px 0 10px;
   }
 }
+.search{
+  border: none;
+  outline: none;
+  height: 28px;
+  padding: 0 20px 0 10px;
+}
+
 @media screen and (min-width: 471px) {
   .search-bar{
     .searchBtn{
@@ -189,6 +200,20 @@
     height: 30px;
     width: 30px;
     border-radius: 35px;
+    border: 1px solid;
+    background-color: #ffbb00;
+    cursor: pointer;
+  }
+}
+.search-bar{
+  .searchBtnOff{
+    position: relative;
+    right: 12px;
+    bottom: 1px;
+    margin: 0px;
+    height: 28px;
+    width: 30px;
+   border-radius: 0px 10px 10px 0px;
     border: 1px solid;
     background-color: #ffbb00;
     cursor: pointer;

@@ -123,14 +123,14 @@ const Navbar = () => {
                 </span>
 
                 <button
-                  className="searchBtn responsive-form-close"
+                  className={formResponsive?"searchBtnOff":"searchBtn"}
                   style={formResponsive ? { display: "inline" } : {}}
                   onClick={() => setFormResposive(true)}
                 >
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
               </form>
-              <Link to={"/login"}>
+              <Link to={"/login"} style={formResponsive?{display:"none"}:{}}>
                 <button>Accedi</button>
               </Link>
             </div>
@@ -176,7 +176,7 @@ const Navbar = () => {
                 </span>
 
                 <button
-                  className="searchBtn responsive-form-close"
+                  className={formResponsive?"searchBtnOff":"searchBtn"}
                   style={formResponsive ? { display: "inline" } : {}}
                   onClick={() => setFormResposive(true)}
                 >
