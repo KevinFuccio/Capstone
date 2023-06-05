@@ -4,10 +4,10 @@ const Footer = () => {
     <footer>
 <div className="footer">
 <div className="rowl">
-<a href="#"><i className="fa fa-facebook icons"></i></a>
-<a href="#"><i className="fa fa-instagram icons"></i></a>
-<a href="#"><i className="fa fa-youtube icons"></i></a>
-<a href="#"><i className="fa fa-twitter icons"></i></a>
+<a href="https://www.facebook.com/AranceNovus"><i className="fa fa-facebook icons"></i></a>
+<a href="https://instagram.com/agrofuccio?igshid=ZDc4ODBmNjlmNQ=="><i className="fa fa-instagram icons"></i></a>
+<a href="https://github.com/KevinFuccio/Capstone"><i className="fa fa-github icons"></i></a>
+<a href="https://www.linkedin.com/in/kevin-fuccio-28bb07267/"><i className="fa fa-linkedin icons"></i></a>
 </div>
 
 <div className="rowl">
